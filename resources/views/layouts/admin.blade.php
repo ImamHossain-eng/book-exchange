@@ -30,6 +30,7 @@
   @if(Auth::user()->id===7)
   <a href="/admin/register" class="w3-bar-item w3-button">Create New Admin</a>
   @endif
+  <a href="/admin/book" class="w3-bar-item w3-button">Books</a>
   <a href="/admin/feedback" class="w3-bar-item w3-button">Feedbacks</a>
   <a href="/admin/book/type" class="w3-bar-item w3-button">Book Type</a>
   <a href="#" class="w3-bar-item w3-button">Link 2</a>

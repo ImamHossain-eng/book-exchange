@@ -35,7 +35,15 @@ Route::prefix('admin')->group(function(){
     //Book Category
     Route::get('/book/type', [BackController::class, 'book_type'])->name('admin.book_type');
     Route::get('/book/type/create', [BackController::class, 'type_create'])->name('admin.type_create');
-    Route::post('/book/type', [BackController::class, 'book_store'])->name('admin.type_store');
+    Route::post('/book/type', [BackController::class, 'type_store'])->name('admin.type_store');
     Route::delete('/book/type/{id}', [BackCOntroller::class, 'type_destroy'])->name('admin.type_destroy');
+    //Book CRUD
+    Route::get('/book', [BackController::class, 'book_index'])->name('admin.book_index');
+    Route::get('/book/create', [BackController::class, 'book_create'])->name('admin.book_create');
+    Route::post('/book', [BackController::class, 'book_store'])->name('admin.book_store');
+    Route::delete('/book/{id}', [BackController::class, 'book_destroy'])->name('admin.book_destroy');
+    Route::get('/book/{id}/edit', [BackController::class, 'book_edit'])->name('admin.book_edit');
+
+
 });
 
