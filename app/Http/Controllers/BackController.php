@@ -92,9 +92,46 @@ class BackController extends Controller
     }
     public function book_edit($id){
         $book = Book::find($id);
-        $typeId = $book->category;
-        $type = Type::find($typeId);
-        return [$book, $type];
-        //return view('admin.book.edit', compact('book', 'type'));
+        $types = Type::all();
+        //return [$book, $type];
+        return view('admin.book.edit', compact('book', 'types'));
+    }
+    public function book_update(Request $request, $id){
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required'
+        ]);
+
+        //validation for new book
+        $book = Book::find($id);
+        $oldImg = $book->image;
+        $oldType = $book->category;
+        $newType = $request->input('category');
+        if($newType !== 'null'){
+            $type = $newType;
+        }else{
+            $type = $oldType;
+        }
+        
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $file_name = time().'.'.$extension;
+            Image::make($file)->resize(700, 400)->save(public_path('/contents/images/book/'.$file_name));
+            if($oldImg != 'no_image.png'){
+                File::delete(public_path('/contents/images/book/'.$oldImg));
+            }
+        }else{
+            $file_name = $oldImg;
+        }
+
+        $book->name = $request->input('name');
+        $book->price = $request->input('price');
+        $book->category = $type;
+        $book->image = $file_name;
+        $book->user = 0;
+        $book->confirmed = true;
+        $book->save();
+        return redirect()->route('admin.book_index')->with('warning', 'Successfully Updated');
     }
 }

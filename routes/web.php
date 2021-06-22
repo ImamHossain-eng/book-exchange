@@ -43,6 +43,7 @@ Route::prefix('admin')->group(function(){
     Route::post('/book', [BackController::class, 'book_store'])->name('admin.book_store');
     Route::delete('/book/{id}', [BackController::class, 'book_destroy'])->name('admin.book_destroy');
     Route::get('/book/{id}/edit', [BackController::class, 'book_edit'])->name('admin.book_edit');
+    Route::put('/book/{id}', [BackController::class, 'book_update'])->name('admin.book_update');
 
 
 });
