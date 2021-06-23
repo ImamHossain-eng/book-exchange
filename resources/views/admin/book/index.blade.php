@@ -12,8 +12,9 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>category</th>
                         <th>Price</th>
+                        <th>Group/Area/Category</th>
+                        <th>Status</th>
                         <th>Created At</th>
                         <th>Option</th>
                     </tr>
@@ -23,13 +24,22 @@
                         <tr>
                             <td> {{$key+1}} </td>
                             <td> {{$book->name}} </td>
-                            <td> {{$book->category}} </td>
                             <td> {{$book->price}} </td>
+                            <td> {{Type::find($book->category)->type}} </td>
+                            <td>
+                                @if($book->confirmed == true)
+                                Published
+                                @else 
+                                Pending
+                                @endif
+                            </td>
                             <td> {{$book->created_at->diffForHumans()}} </td>
                             <td>
+                                <a href="/admin/book/{{$book->id}}" class="btn btn-primary">
+                                    <i class="fa fa-eye"></i>
+                                </a>
                                 <a href="/admin/book/{{$book->id}}/edit" class="btn btn-success">
                                     <i class="fa fa-check"></i>
-
                                 </a>
                                 {{Form::open(['method'=>'DELETE', 'route'=>['admin.book_destroy',$book->id],'style'=>'display:inline;']) }}
                                 <button type="submit" style="display:inline;" class="btn btn-danger">
@@ -47,6 +57,7 @@
                     @endforelse
                 </tbody>
             </table>
+            {{$books->links()}}
         </div>
     </div>
 </body>

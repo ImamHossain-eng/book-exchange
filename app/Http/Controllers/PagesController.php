@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Feedback;
+use App\Models\Book;
 
 class PagesController extends Controller
 {
     public function index(){
-        return view('pages.homepage');
+        $books = Book::orderby('created_at', 'desc')->where('confirmed', true)->take(3)->get();
+        return view('pages.homepage', compact('books'));
     }
     public function feedback(Request $request){
         $this->validate($request, [
@@ -25,5 +27,9 @@ class PagesController extends Controller
         $feedback->message = $request->input('message');
         $feedback->save();
         return redirect()->route('homepage')->with('success', 'Successfully sent the Message');
+    }
+    public function book_show($id){
+        $book = Book::find($id);
+        return view('visitor.book_show', compact('book'));
     }
 }

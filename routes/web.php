@@ -28,6 +28,8 @@ Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'handleAd
 
 Route::prefix('admin')->group(function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'handleAdmin']);
+    //manage users
+    Route::get('/users', [BackCOntroller::class, 'user_index'])->name('admin.user_index');
     //Feedback
     Route::get('/feedback', [BackController::class, 'feedback_index'])->name('admin.feedback');
     Route::delete('/feedback/{id}', [BackController::class, 'feedback_destroy'])->name('admin.feedback_destroy');
@@ -44,7 +46,11 @@ Route::prefix('admin')->group(function(){
     Route::delete('/book/{id}', [BackController::class, 'book_destroy'])->name('admin.book_destroy');
     Route::get('/book/{id}/edit', [BackController::class, 'book_edit'])->name('admin.book_edit');
     Route::put('/book/{id}', [BackController::class, 'book_update'])->name('admin.book_update');
-
+    Route::get('/book/{id}', [BackController::class, 'book_show'])->name('admin.book_show');
 
 });
 
+
+
+//Visitor Route
+Route::get('/book/{id}', [PagesController::class, 'book_show']);

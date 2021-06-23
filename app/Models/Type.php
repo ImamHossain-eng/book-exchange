@@ -9,4 +9,7 @@ class Type extends Model
 {
     use HasFactory;
     protected $fillable = ['type'];
+    public function books(){
+        return $this->hasMany(Book::class);
+    }
 }

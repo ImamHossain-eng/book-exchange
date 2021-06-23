@@ -33,8 +33,13 @@
     <title>Online Book Exchange</title>
 </head>
 <body>
-
+    <!--header section start -->
+    @include('parts.navbar')
+    @include('parts.message')
     @yield('content')
+    <!-- footer section start -->
+    @include('parts.footer')
+    <!-- footer section end -->
 
     <!-- Javascript files-->
 <script src="{{asset('js/jquery.min.js')}}"></script>

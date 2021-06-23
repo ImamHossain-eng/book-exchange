@@ -5,8 +5,7 @@
 
 </head>
 <body>
-  <!--header section start -->
-  @include('parts.navbar')
+  
 <!-- header section end -->
 <!-- banner section start -->
   @include('parts.banner')
@@ -27,9 +26,7 @@
 <!-- contact section start -->
   @include('parts.contact')
 <!-- contact section end -->
-<!-- footer section start -->
-  @include('parts.footer')
-<!-- footer section end -->
+
 
 
 

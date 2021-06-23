@@ -10,6 +10,7 @@ use App\Models\Book;
 
 use Image;
 use File;
+use Auth;
 
 class BackController extends Controller
 {
@@ -49,7 +50,7 @@ class BackController extends Controller
         return redirect()->route('admin.book_type')->with('error', 'One Record Removed');
     }
     public function book_index(){
-        $books = Book::all();
+        $books = Book::orderBy('created_at', 'desc')->paginate(5);
         return view('admin.book.index', compact('books'));
     }
     public function book_create(){
@@ -99,8 +100,15 @@ class BackController extends Controller
     public function book_update(Request $request, $id){
         $this->validate($request, [
             'name' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'confirmed' => 'required'
         ]);
+        $conf = $request->input('confirmed');
+        if($conf != 'null'){
+            $confirm = $conf;
+        }else{
+            $confirm = true;
+        }
 
         //validation for new book
         $book = Book::find($id);
@@ -130,8 +138,12 @@ class BackController extends Controller
         $book->category = $type;
         $book->image = $file_name;
         $book->user = 0;
-        $book->confirmed = true;
+        $book->confirmed = $confirm;
         $book->save();
         return redirect()->route('admin.book_index')->with('warning', 'Successfully Updated');
+    }
+    public function book_show($id){
+        $book = Book::find($id);
+        return view('admin.book.show', compact('book'));
     }
 }

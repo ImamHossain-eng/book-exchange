@@ -27,8 +27,8 @@
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large"
   onclick="w3_close()">Close &times;</button>
-  @if(Auth::user()->id===7)
-  <a href="/admin/register" class="w3-bar-item w3-button">Create New Admin</a>
+  @if(Auth::user()->is_admin==1)
+  <a href="/admin/users" class="w3-bar-item w3-button">Create New Admin</a>
   @endif
   <a href="/admin/book" class="w3-bar-item w3-button">Books</a>
   <a href="/admin/feedback" class="w3-bar-item w3-button">Feedbacks</a>
@@ -55,6 +55,7 @@
 </div>
 
 <div class="container">
+  @include('parts.message')
     @yield('content')
 </div>
 

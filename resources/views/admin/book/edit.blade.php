@@ -15,6 +15,13 @@
                     <input type="number" name="price" value="{{$book->price}}" placeholder="Enter Book Price" class="form-control">
                 </div><br>
                 <div class="form-group">
+                    <select name="confirmed" class="form-control btn btn-secondary">
+                        <option value="null">Choose Status</option>
+                        <option value="0">Pending</option>
+                        <option value="1">Published</option>
+                    </select>
+                </div><br>
+                <div class="form-group">
                     <input type="file" name="image" class="form-control">
                 </div><br>
                 <select name="category" class="form-control">
