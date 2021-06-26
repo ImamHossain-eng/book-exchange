@@ -7,15 +7,47 @@ use Illuminate\Http\Request;
 use App\Models\Feedback;
 use App\Models\Type;
 use App\Models\Book;
+use App\Models\User;
+
 
 use Image;
 use File;
 use Auth;
 
+
 class BackController extends Controller
 {
     public function __construct(){
         $this->middleware('admin');
+    }
+    //User SHow
+    public function user_index(){
+        $users = User::orderBy('created_at', 'desc')->paginate(5);
+        return view('admin.super.users', compact('users'));
+    }
+    public function user_edit($id){
+        $user = User::find($id);
+        return view('admin.super.user_edit', compact('user'));
+    }
+    public function user_update(Request $request, $id){
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+        $user = User::find($id);
+        $newConf = $request->input('config');
+        $oldConf = $user->config;
+        if($newConf !== 'null'){
+            $conf = $newConf;
+        }else{
+            $conf = $oldConf;
+        }
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->config = $conf;
+        $user->save();
+        return redirect()->route('admin.user_index')->with('warning', 'Successfully Updated');
+
     }
     public function feedback_index(){
         $feedbacks = Feedback::all();
@@ -30,6 +62,7 @@ class BackController extends Controller
         $feedback = Feedback::find($id);
         return view('admin.feedback_show', compact('feedback'));
     }
+
     //Book Category start from here
     public function book_type(){
         $types = Type::all();

@@ -29,7 +29,9 @@ Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'handleAd
 Route::prefix('admin')->group(function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'handleAdmin']);
     //manage users
-    Route::get('/users', [BackCOntroller::class, 'user_index'])->name('admin.user_index');
+    Route::get('/users', [BackController::class, 'user_index'])->name('admin.user_index');
+    Route::get('/users/{id}/edit', [BackController::class, 'user_edit'])->name('admin.user_edit');
+    Route::put('/users/{id}', [BackController::class, 'user_update'])->name('admin.user_update');
     //Feedback
     Route::get('/feedback', [BackController::class, 'feedback_index'])->name('admin.feedback');
     Route::delete('/feedback/{id}', [BackController::class, 'feedback_destroy'])->name('admin.feedback_destroy');

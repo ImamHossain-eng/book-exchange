@@ -19,20 +19,16 @@
 </head>
 <body>
     <div id="app">
-
-
 <!--Sidebar-->
-
-
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large"
   onclick="w3_close()">Close &times;</button>
   @if(Auth::user()->is_admin==1)
-  <a href="/admin/users" class="w3-bar-item w3-button">Create New Admin</a>
+  <a href="/admin/users" class="w3-bar-item w3-button">Manage Users</a>
   @endif
   <a href="/admin/book" class="w3-bar-item w3-button">Books</a>
-  <a href="/admin/feedback" class="w3-bar-item w3-button">Feedbacks</a>
   <a href="/admin/book/type" class="w3-bar-item w3-button">Book Type</a>
+  <a href="/admin/feedback" class="w3-bar-item w3-button">Feedbacks</a>
   <a href="#" class="w3-bar-item w3-button">Link 2</a>
   <a href="#" class="w3-bar-item w3-button">Link 3</a>
   <div>
