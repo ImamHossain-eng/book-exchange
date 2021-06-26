@@ -34,6 +34,7 @@ class BackController extends Controller
             'name' => 'required',
             'email' => 'required'
         ]);
+        //validation of user types
         $user = User::find($id);
         $newConf = $request->input('config');
         $oldConf = $user->config;
