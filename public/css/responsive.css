@@ -127,7 +127,7 @@
         top: 0;
     }
 
-.toggle_menu { top: -58px; position: relative; left: 242px; }
+.toggle_menu { top: -58px; visibility: visible; position: relative; left: 242px; }
 
 
 
@@ -165,7 +165,7 @@ width: 30%;
 }
 .about_text_2 {width: 23%; }
 .menu_text li { padding-left: 10px; font-size: 16px; margin-top: 4px; padding-right: 24px; }
-.toggle_menu { top: -15px;  left: 63px; }
+.toggle_menu { top: -15px;  left: 63px; visibility: visible;}
 .find_text { font-size: 50px; }
 .header_section { padding-bottom: 0px; }
 .crush_text { font-size: 36px; padding: 0px; }
@@ -238,7 +238,7 @@ width: 30%;
     }
 
 .menu_text li{ display: none; }
-.toggle_menu { top: -17px;  left: 495px; }
+.toggle_menu { top: -17px;  left: 495px; visibility: visible;}
 .logo { text-align: left;}
 .header_section { padding-bottom: 0px; }
 .find_text { font-size: 44px; }
@@ -332,7 +332,7 @@ padding: 126px 40px;
 }
 
 .menu_text li a{ display: none; }
-.toggle_menu { top: -44px; position: relative; left: 495px; }
+.toggle_menu { top: -44px; position: relative; left: 495px; visibility: visible; }
 .header_section { padding-bottom: 15px; padding-top: 15px; }
 .menu_text { height: 0px; }
 .find_text { font-size: 32px; }

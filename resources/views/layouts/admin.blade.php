@@ -23,6 +23,9 @@
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large"
   onclick="w3_close()">Close &times;</button>
+  @if(Auth::user()->id==1)
+  <a href="/admin/user/admins" class="w3-bar-item w3-button">Manage Admin</a>
+  @endif
   @if(Auth::user()->is_admin==1)
   <a href="/admin/users" class="w3-bar-item w3-button">Manage Users</a>
   @endif

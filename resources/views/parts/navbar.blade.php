@@ -30,7 +30,7 @@
               <a href="#">REGISTER</a>
             </div>
             </div>
-            <span  style="font-size:33px;cursor:pointer; color: #ffffff;" onclick="openNav()"><img src="{{asset('contents/images/modules/toggle.png')}}" class="toggle_menu"></span>
+            <span  style="font-size:33px;cursor:pointer; color: #ffffff; visibility: hidden;" onclick="openNav()"><img src="{{asset('contents/images/modules/toggle.png')}}" class="toggle_menu"></span>
             </div>  
             </li>
                     </ul>

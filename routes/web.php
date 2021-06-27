@@ -28,6 +28,10 @@ Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'handleAd
 
 Route::prefix('admin')->group(function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'handleAdmin']);
+    //Manage Admins
+    Route::get('/user/admins', [BackController::class, 'admin_index'])->name('admin.admin_index');
+    Route::get('/user/admin/create', [BackController::class, 'admin_create'])->name('admin.admin_create');
+    Route::post('/user/admins', [BackController::class, 'admin_store'])->name('admin.admin_store');
     //manage users
     Route::get('/users', [BackController::class, 'user_index'])->name('admin.user_index');
     Route::get('/users/{id}/edit', [BackController::class, 'user_edit'])->name('admin.user_edit');

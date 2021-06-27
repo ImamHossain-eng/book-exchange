@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 use App\Models\Feedback;
@@ -20,9 +20,45 @@ class BackController extends Controller
     public function __construct(){
         $this->middleware('admin');
     }
+    //manage admins
+    public function admin_index(){
+        if(Auth::user()->id == 1){
+            $users = User::orderBy('created_at', 'desc')->where('is_admin', 1)->paginate(10);
+            return view('admin.super.admins', compact('users'));
+        }else{
+            return redirect()->route('admin.route')->with('error', 'You are not the Super Admin');
+        }
+    }
+    public function admin_create(){
+        if(Auth::user()->id == 1){
+            return view('admin.super.admin_create');
+        }else{
+            return redirect()->route('admin.route')->with('error', 'You are not the Super Admin');
+        }
+    }
+    public function admin_store(Request $request){
+        if(Auth::user()->id == 1){
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required'
+            ]);
+            $pass = $request->input('password');
+            $password = Hash::make($pass);
+            $user = new User;
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = $password;
+            $user->is_admin = 1;
+            $user->save();
+            return redirect()->route('admin.admin_index')->with('success', 'Successfully Created new Admin');
+        }else{
+            return redirect()->route('admin.route')->with('error', 'You are not the Super Admin');
+        }
+    }
     //User SHow
     public function user_index(){
-        $users = User::orderBy('created_at', 'desc')->paginate(5);
+        $users = User::where('is_admin', null)->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.super.users', compact('users'));
     }
     public function user_edit($id){
