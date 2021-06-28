@@ -7,7 +7,6 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Created</th>
-                <th>User Type</th>
                 <th>Status</th>
                 <th>Option</th>
             </tr>
@@ -16,7 +15,7 @@
             @forelse($users as $key => $user)
                 <tr @if($user->is_admin == 1)
                         class="table-warning" 
-                    @elseif($user->config== '')
+                    @elseif($user->config== '1')
                      class="table-danger"
                     @else
                      class="table-success"
@@ -25,14 +24,7 @@
                     <td> {{$user->email}} </td>
                     <td> {{$user->created_at->diffForHumans()}} </td>
                     <td>
-                        @if($user->is_admin == 1)
-                            Admin
-                        @else 
-                            User
-                        @endif
-                    </td>
-                    <td>
-                        @if($user->config == '')
+                        @if($user->config == '1')
                         <h6 style="color:brown;">Unregistered</h6>
                         @elseif($user->config == '0')
                         <h6 style="color:green;">Registered</h6>

@@ -147,7 +147,7 @@ class BackController extends Controller
         $book->price = $request->input('price');
         $book->category = $request->input('category');
         $book->image = $file_name;
-        $book->user = 0;
+        $book->user = 'admin';
         $book->confirmed = true;
         $book->save();
         return redirect()->route('admin.book_index')->with('success', 'Successfully Created');
@@ -207,7 +207,7 @@ class BackController extends Controller
         $book->price = $request->input('price');
         $book->category = $type;
         $book->image = $file_name;
-        $book->user = 0;
+        $book->user = 'admin';
         $book->confirmed = $confirm;
         $book->save();
         return redirect()->route('admin.book_index')->with('warning', 'Successfully Updated');

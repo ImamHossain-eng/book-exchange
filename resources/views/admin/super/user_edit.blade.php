@@ -17,7 +17,7 @@
             <div class="form-group">
                 <select name="config" class="form-control">
                     <option value="null">Choose Status</option>
-                    <option value="">Unregistered</option>
+                    <option value="1">Unregistered</option>
                     <option value="0">Register</option>
 
                 </select>

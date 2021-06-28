@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\BackController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,15 @@ Route::prefix('admin')->group(function(){
     Route::put('/book/{id}', [BackController::class, 'book_update'])->name('admin.book_update');
     Route::get('/book/{id}', [BackController::class, 'book_show'])->name('admin.book_show');
 
+});
+
+//User Route
+Route::prefix('user')->group(function(){
+    //Book Published
+    Route::get('/book', [UserController::class, 'book_index'])->name('user.book_index');
+    Route::get('/book/create', [UserController::class, 'book_create'])->name('user.book_create');
+    Route::post('/book', [UserController::class, 'book_store'])->name('user.book_store');
+    Route::delete('/book/{id}', [UserController::class, 'book_destroy'])->name('user.book_destroy');
 });
 
 
