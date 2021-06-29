@@ -15,13 +15,19 @@
                         <th>Price</th>
                         <th>Group/Area/Category</th>
                         <th>Status</th>
+                        <th>Creator</th>
                         <th>Created At</th>
                         <th>Option</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($books as $key => $book)
-                        <tr>
+                        <tr @if($book->user !== 'admin') 
+                            class="table-danger"
+                            @else 
+                            class="table-warning"
+                            @endif
+                            >
                             <td> {{$key+1}} </td>
                             <td> {{$book->name}} </td>
                             <td> {{$book->price}} </td>
@@ -31,6 +37,13 @@
                                 Published
                                 @else 
                                 Pending
+                                @endif
+                            </td>
+                            <td>
+                                @if($book->user !== 'admin')
+                                User: {{User::find($book->user)->email}}
+                                @else 
+                                admin 
                                 @endif
                             </td>
                             <td> {{$book->created_at->diffForHumans()}} </td>

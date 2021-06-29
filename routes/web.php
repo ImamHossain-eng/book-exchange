@@ -63,6 +63,9 @@ Route::prefix('user')->group(function(){
     Route::get('/book', [UserController::class, 'book_index'])->name('user.book_index');
     Route::get('/book/create', [UserController::class, 'book_create'])->name('user.book_create');
     Route::post('/book', [UserController::class, 'book_store'])->name('user.book_store');
+    Route::get('/book/{id}', [UserController::class, 'book_show'])->name('user.book_show');
+    Route::get('/book/{id}/edit', [UserController::class, 'book_edit'])->name('user.book_edit');
+    Route::put('/book/{id}', [UserController::class, 'book_update'])->name('user.book_update');
     Route::delete('/book/{id}', [UserController::class, 'book_destroy'])->name('user.book_destroy');
 });
 

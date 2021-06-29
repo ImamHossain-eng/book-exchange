@@ -21,6 +21,56 @@ class UserController extends Controller
         $books = Book::where('user', $user)->paginate(10);
         return view('user.book_index', compact('books'));
     }
+    public function book_show($id){
+        $book = Book::find($id);
+        return view('user.book_show', compact('book'));
+    }
+    public function book_edit($id){
+        $book = Book::find($id);
+        $types = Type::all();
+        return view('user.book_edit', compact('book', 'types'));
+    }
+    public function book_update(Request $request, $id){
+        $book = Book::find($id);
+        $oldImg = $book->image;
+        $book_user = $book->user;
+        $newC = $request->input('category');
+        $oldC = $book->category;
+        if(Auth::user()->id == $book_user){
+            $this->validate($request, [
+                'name' => 'required',
+                'price' => 'required',
+            ]);
+            //image validation
+            if($request->hasFile('image')){
+                $file = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $file_name = time().'.'.$extension;
+                Image::make($file)->resize(700, 400)->save(public_path('/contents/images/book/'.$file_name));
+                if($oldImg !== 'no_image.png'){
+                    File::delete(public_path('/contents/images/book/'.$oldImg));
+                }
+            }else{
+                $file_name = $oldImg;
+            }
+            //category validation
+            if($newC !== 'null'){
+                $category = $newC;
+            }else{
+                $category = $oldC;
+            }
+            $book->name = $request->input('name');
+            $book->price = $request->input('price');
+            $book->category = $category;
+            $book->image = $file_name;
+            $book->user = Auth::user()->id;
+            $book->save();
+            return redirect()->route('user.book_index')->with('warning', 'Successfully Updated');
+
+        }else{
+            return redirect()->route('user.book_index')->with('error', 'Operation Failed');
+        }
+    }
     public function book_create(){
         if(Auth::user()->config == 0){
             $types = Type::all();

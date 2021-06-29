@@ -230,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Type' => App\Models\Type::class,
+        'User' => App\Models\User::class,
 
     ],
 
