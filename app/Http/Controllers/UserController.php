@@ -60,10 +60,10 @@ class UserController extends Controller
                 $category = $oldC;
             }
             $book->name = $request->input('name');
+            $book->author = $request->input('author');
             $book->price = $request->input('price');
             $book->category = $category;
             $book->image = $file_name;
-            $book->user = Auth::user()->id;
             $book->save();
             return redirect()->route('user.book_index')->with('warning', 'Successfully Updated');
 
@@ -96,6 +96,7 @@ class UserController extends Controller
 
         $book = new Book;
         $book->name = $request->input('name');
+        $book->author = $request->input('author');
         $book->price = $request->input('price');
         $book->category = $request->input('category');
         $book->image = $file_name;

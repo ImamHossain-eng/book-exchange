@@ -14,7 +14,7 @@
                     <ul>
                         <li><a href="index.html">HOME</a></li>                                                    
                         <li><a href="about.html">ABOUT</a></li>
-                        <li><a href="price.html">PACKAGE</a></li>
+                        <li><a href="/books">BOOK LIST</a></li>
                         <li><a href="gym.html">TRAINING</a></li>
                         <li><a href="contact.html">CONTACT US</a></li>
                         <div id="myNav" class="overlay">

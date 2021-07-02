@@ -25,7 +25,7 @@
           <p class="fact_text">It is a long established fact that a reader will be distracted by the readable</p>
           </div>-->
           <div class="bt_main">
-            <div class="seemore_bt"><a href="#">See More</a></div>
+            <div class="seemore_bt"><a href="/books">See More</a></div>
           </div>
       </div>
       

@@ -73,3 +73,6 @@ Route::prefix('user')->group(function(){
 
 //Visitor Route
 Route::get('/book/{id}', [PagesController::class, 'book_show']);
+Route::get('/books', [PagesController::class, 'book_index'])->name('visitor.book_index');
+//search the book
+Route::post('/books', [PagesController::class, 'book_find'])->name('book.search');

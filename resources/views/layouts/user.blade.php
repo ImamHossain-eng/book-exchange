@@ -28,7 +28,7 @@
   <a href="#" class="w3-bar-item w3-button">Registered Users</a>
 
   @else
-  <a href="#" class="w3-bar-item w3-button">None</a>
+  <a href="#" class="w3-bar-item w3-button">Unregistered User</a>
   @endif
   
   <a href="#" class="w3-bar-item w3-button">Link 3</a>
