@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Type;
 use App\Models\Book;
+use App\Models\Transaction;
+use App\Models\Account;
 
 use Auth;
 
@@ -103,6 +105,37 @@ class UserController extends Controller
         $book->user = Auth::user()->id;
         $book->confirmed = false;
         $book->save();
+        //effect to the transaction table
+        $transaction = new Transaction;
+        $transaction->user_id = Auth::user()->id;
+        $transaction->book_id = $book->id;
+        $transaction->price = $book->price;
+        $transaction->credit = true;
+        $transaction->debit = false;
+        $transaction->save();
+        //effect to the main account balance
+        $accounts = Account::all();
+        foreach($accounts as $acc){
+            if($acc->user_id == Auth::user()->id){
+                if($transaction->credit == true){
+                    $acc->balance += $book->price;
+                    $acc->save();
+                }elseif($transaction->debit == true){
+                    $acc->balance -= $book->price;
+                    $acc->save();
+                }else{
+                    return 123;
+                }
+            }else{
+                $account = new Account;
+                $account->user_id = Auth::user()->id;
+                if($transaction->credit == true){
+                    $account->balance = $book->price;
+                }
+                $account->save();
+            }
+        }
+
         return redirect()->route('user.book_index')->with('success', 'Successfully Created');
     }
     public function book_destroy($id){

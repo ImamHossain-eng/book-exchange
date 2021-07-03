@@ -12,6 +12,7 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
+                        <th>Author</th>
                         <th>Price</th>
                         <th>Group/Area/Category</th>
                         <th>Status</th>
@@ -24,6 +25,7 @@
                         <tr>
                             <td> {{$key+1}} </td>
                             <td> {{$book->name}} </td>
+                            <td> {{$book->author}} </td>
                             <td> {{$book->price}} </td>
                             <td> {{Type::find($book->category)->type}} </td>
                             <td>

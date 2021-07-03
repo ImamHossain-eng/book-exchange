@@ -2,26 +2,25 @@
 @section('content')
 <body>
     <div class="container">
-        @auth
             <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 {{Form::open(['route' => 'book.search', 'method' => 'POST', 'enctype' => 'multipart/form-data'])}}
                 <div class="form-group">
-                    <select name="type" class="form-control">
+                    <select name="type" class="form-control btn btn-outline-primary">
                         <option value="null">Choose Book Category</option>
                         @foreach($types as $type)
                         <option value="{{$type->id}}"> {{$type->type}} </option>
                         @endforeach
                     </select>
-                </div>
-                <div class="col-md-6">
-                    <input type="submit" value="Search" class="btn btn-primary" style="display: inline;">
-                    {{Form::close()}}
-                </div>
-                
+                </div>                
+            </div>
+            <div class="col-md-4">
+                <input type="submit" value="Search" class="btn btn-primary" style="width:100%;">
+                {{Form::close()}}
             </div>
         </div>
-        @endauth
+
+
         <div class="row">
             @forelse($books as $key => $book)
             <div class="col-md-4">
