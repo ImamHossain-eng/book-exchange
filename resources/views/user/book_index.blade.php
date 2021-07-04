@@ -29,10 +29,12 @@
                             <td> {{$book->price}} </td>
                             <td> {{Type::find($book->category)->type}} </td>
                             <td>
-                                @if($book->confirmed == true)
+                                @if($book->confirmed == 1)
                                 Published
-                                @else 
+                                @elseif($book->confirmed == 0)
                                 Pending
+                                @else 
+                                Undefine
                                 @endif
                             </td>
                             <td> {{$book->created_at->diffForHumans()}} </td>

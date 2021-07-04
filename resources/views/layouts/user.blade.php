@@ -25,6 +25,7 @@
   onclick="w3_close()">Close &times;</button>
   @if(Auth::user()->config==0)
   <a href="/user/book" class="w3-bar-item w3-button">Your Book List</a>
+  <a href="/user/transaction" class="w3-bar-item w3-button">Your Transaction List</a>
   <a href="#" class="w3-bar-item w3-button">Registered Users</a>
 
   @else

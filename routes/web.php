@@ -67,6 +67,8 @@ Route::prefix('user')->group(function(){
     Route::get('/book/{id}/edit', [UserController::class, 'book_edit'])->name('user.book_edit');
     Route::put('/book/{id}', [UserController::class, 'book_update'])->name('user.book_update');
     Route::delete('/book/{id}', [UserController::class, 'book_destroy'])->name('user.book_destroy');
+    //Transaction List
+    Route::get('/transaction', [UserController::class, 'transaction_list'])->name('user.transaction');
 });
 
 

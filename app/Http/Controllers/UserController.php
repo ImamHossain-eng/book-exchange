@@ -147,4 +147,12 @@ class UserController extends Controller
         $book->delete();
         return redirect()->route('user.book_index')->with('error', 'Removed');
     }
+    //transaction list start from here
+    public function transaction_list(){
+        $user = Auth::user()->id;
+        $transactions = Transaction::orderBy('created_at', 'desc')->where('user_id', $user)->get();
+        $trans_credit = Transaction::orderBy('created_at', 'desc')->where('user_id', $user)->where('credit', 1)->sum('price');
+        $trans_debit = Transaction::orderBy('created_at', 'desc')->where('user_id', $user)->where('debit', 1)->sum('price');
+        return view('user.transaction_index', compact('transactions', 'trans_credit', 'trans_debit'));
+    }
 }

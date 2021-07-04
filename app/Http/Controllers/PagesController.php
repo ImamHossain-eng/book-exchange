@@ -44,7 +44,7 @@ class PagesController extends Controller
         ]);
         $newType = $request->input('type');
         if($newType !== 'null'){
-            $books = Book::orderBy('created_at', 'desc')->where('category', $newType)->paginate(100);
+            $books = Book::orderBy('created_at', 'desc')->where('category', $newType)->where('confirmed', true)->paginate(100);
             $types = Type::all();
             return view('visitor.book_index', compact('books', 'types'))->with('success', 'Filtered by Type');
         }else{
