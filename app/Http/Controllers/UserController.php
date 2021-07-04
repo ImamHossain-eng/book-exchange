@@ -11,6 +11,7 @@ use App\Models\Transaction;
 use App\Models\Account;
 
 use Auth;
+use Image;
 
 class UserController extends Controller
 {
@@ -105,16 +106,8 @@ class UserController extends Controller
         $book->user = Auth::user()->id;
         $book->confirmed = false;
         $book->save();
-        //effect to the transaction table
-        $transaction = new Transaction;
-        $transaction->user_id = Auth::user()->id;
-        $transaction->book_id = $book->id;
-        $transaction->price = $book->price;
-        $transaction->credit = true;
-        $transaction->debit = false;
-        $transaction->save();
         //effect to the main account balance
-        $accounts = Account::all();
+        /*$accounts = Account::all();
         foreach($accounts as $acc){
             if($acc->user_id == Auth::user()->id){
                 if($transaction->credit == true){
@@ -134,7 +127,7 @@ class UserController extends Controller
                 }
                 $account->save();
             }
-        }
+        }*/
 
         return redirect()->route('user.book_index')->with('success', 'Successfully Created');
     }

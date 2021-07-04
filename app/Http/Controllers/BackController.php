@@ -8,6 +8,7 @@ use App\Models\Feedback;
 use App\Models\Type;
 use App\Models\Book;
 use App\Models\User;
+use App\Models\Transaction;
 
 
 use Image;
@@ -174,13 +175,7 @@ class BackController extends Controller
             'price' => 'required',
             'confirmed' => 'required'
         ]);
-        $conf = $request->input('confirmed');
-        if($conf != 'null'){
-            $confirm = $conf;
-        }else{
-            $confirm = true;
-        }
-
+        
         //validation for new book
         $book = Book::find($id);
         $oldImg = $book->image;
@@ -191,7 +186,36 @@ class BackController extends Controller
         }else{
             $type = $oldType;
         }
-        
+        //Confirmed validation 
+        $conf = $request->input('confirmed');
+        $oldConf = $book->confirmed;
+        if($conf !== 'null'){
+            $confirm = $conf;
+        }else{
+            $confirm = $oldConf;
+        }
+        //transaction validation
+        if($conf == 1){
+            //effect to the transaction table
+            $trans = Transaction::all();
+            foreach($trans as $tran){
+                if($tran->book_id !== $book->id){
+                    $ab = true;
+                }else{
+                    $ab = false;
+                }
+            }
+            if($ab == true){
+                    $transaction = new Transaction;
+                    $transaction->user_id = $book->user;
+                    $transaction->book_id = $book->id;
+                    $transaction->price = $book->price;
+                    $transaction->credit = true;
+                    $transaction->debit = false;
+                    $transaction->save();
+            }
+        }
+        //image validation
         if($request->hasFile('image')){
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();

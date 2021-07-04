@@ -10,7 +10,7 @@
                 {{$transactions->count()}} Transactions
             </h4>
             <p class="card-text">
-                Available balance: {{$trans_credit-$trans_debit}}
+                Available balance: {{number_format($trans_credit-$trans_debit, 2)}}
             </p>
         </div>
         <div class="card-body">
@@ -49,7 +49,7 @@
                                 <i class="fa fa-times"></i>
                             @endif
                         </td>
-                        <td> {{$trans->created_at->diffForHumans()}} </td>
+                        <td>{{ date('F d, Y(D)', strtotime($trans->created_at))}} at {{ date('g:ia', strtotime($trans->created_at))}} in words {{$trans->created_at->diffForHumans()}} </td>
                     </tr>
                     @empty 
                     <tr>
