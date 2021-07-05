@@ -58,12 +58,17 @@
                         </td>
                     </tr>
                     @endforelse
+                    <tr class="table-danger">
+                        <td></td>
+                        <td></td>
+                        <td>Mean Balance: {{$trans_credit-$trans_debit}}/=</td>
+                        <td>Total Credit: {{$trans_credit}}/=</td>
+                        <td>Total Debit: {{$trans_debit}}/=</td>
+                        <td></td>
+
+                    </tr>
                 </tbody>
             </table>
-
-            Total Credit: {{$trans_credit}} /=
-            Total Debit: {{$trans_debit}} /=
-            Balance: {{$trans_credit-$trans_debit}}
         </div>
     </div>
 </body>

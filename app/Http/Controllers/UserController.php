@@ -148,4 +148,34 @@ class UserController extends Controller
         $trans_debit = Transaction::orderBy('created_at', 'desc')->where('user_id', $user)->where('debit', 1)->sum('price');
         return view('user.transaction_index', compact('transactions', 'trans_credit', 'trans_debit'));
     }
+    public function user_acount(){
+        $user = Auth::user()->id;
+        $transactions = Transaction::orderBy('created_at', 'desc')->where('user_id', $user)->count();
+        $trans_credit = Transaction::orderBy('created_at', 'desc')->where('user_id', $user)->where('credit', 1)->sum('price');
+        $trans_debit = Transaction::orderBy('created_at', 'desc')->where('user_id', $user)->where('debit', 1)->sum('price');
+        $total_balance = $trans_credit-$trans_debit;
+        //validation for account balance table
+        $accounts = Account::all();
+        foreach($accounts as $acc){
+            if($acc->user_id !== $user){
+                $ab = false;
+            }else{
+                $ab = true;
+            }
+        }
+        if($ab == false){
+                $account = new Account;
+                $account->user_id = $user;
+                $account->balance = $total_balance;
+                $account->save();
+                return view('user.account', compact('account', 'transactions'));
+        }elseif($ab == true){
+                $account = Account::where('user_id', $user)->first();
+                $account->balance = $total_balance;
+                $account->save();
+                return view('user.account', compact('account', 'transactions'));
+        }else{
+            return view('user.account', compact('transactions'));
+        }
+    }
 }

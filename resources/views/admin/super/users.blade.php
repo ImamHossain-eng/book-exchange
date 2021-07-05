@@ -28,6 +28,8 @@
                         <h6 style="color:brown;">Unregistered</h6>
                         @elseif($user->config == '0')
                         <h6 style="color:green;">Registered</h6>
+                        @else 
+                        <h6 style="color:rgba(38, 0, 255, 0.842);">New User</h6>
                         @endif
                     </td>
                     <td>

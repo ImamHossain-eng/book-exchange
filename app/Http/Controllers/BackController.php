@@ -198,8 +198,9 @@ class BackController extends Controller
         if($conf == 1){
             //effect to the transaction table
             $trans = Transaction::all();
+            //CHeck if transaction exists
             foreach($trans as $tran){
-                if($tran->book_id !== $book->id){
+                if($tran->book_id !== $book->id && $tran->user_id !== $book->user){
                     $ab = true;
                 }else{
                     $ab = false;

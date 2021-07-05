@@ -23,13 +23,16 @@
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large"
   onclick="w3_close()">Close &times;</button>
-  @if(Auth::user()->config==0)
+  @if(Auth::user()->config == '')
+  <a href="#" class="w3-bar-item w3-button">New User</a>
+  
+  @elseif(Auth::user()->config == 1)
+  <a href="#" class="w3-bar-item w3-button">Unregistered User</a>
+  @else 
   <a href="/user/book" class="w3-bar-item w3-button">Your Book List</a>
   <a href="/user/transaction" class="w3-bar-item w3-button">Your Transaction List</a>
+  <a href="/user/account" class="w3-bar-item w3-button">Your Account Balance</a>
   <a href="#" class="w3-bar-item w3-button">Registered Users</a>
-
-  @else
-  <a href="#" class="w3-bar-item w3-button">Unregistered User</a>
   @endif
   
   <a href="#" class="w3-bar-item w3-button">Link 3</a>
