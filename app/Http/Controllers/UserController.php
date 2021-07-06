@@ -19,6 +19,16 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
+    //add book to user card
+    public function book_card($id){
+        $book = Book::find($id);
+        return $book;
+    }
+    public function books_index(){
+        $books = Book::orderBy('created_at', 'desc')->where('confirmed', true)->paginate(6);
+        $types = Type::all();
+        return view('user.books_index', compact('books', 'types'));
+    }
     public function book_index(){
         $user = Auth::user()->id;
         $books = Book::where('user', $user)->paginate(10);
@@ -155,7 +165,20 @@ class UserController extends Controller
         $trans_debit = Transaction::orderBy('created_at', 'desc')->where('user_id', $user)->where('debit', 1)->sum('price');
         $total_balance = $trans_credit-$trans_debit;
         //validation for account balance table
-        $accounts = Account::all();
+        if(Account::where('user_id', '=', $user)->exists()){
+            $account = Account::where('user_id', $user)->first();
+            // $account = Account::find($account_user->id);
+            $account->balance = $total_balance;
+            $account->save();
+            return view('user.account', compact('account', 'transactions'));
+         }else{
+            $account = new Account;
+            $account->user_id = $user;
+            $account->balance = $total_balance;
+            $account->save();
+            return view('user.account', compact('account', 'transactions'));
+         }
+        /*$accounts = Account::all();
         foreach($accounts as $acc){
             if($acc->user_id !== $user){
                 $ab = false;
@@ -176,6 +199,6 @@ class UserController extends Controller
                 return view('user.account', compact('account', 'transactions'));
         }else{
             return view('user.account', compact('transactions'));
-        }
+        }*/
     }
 }

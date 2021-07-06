@@ -29,6 +29,7 @@
   @elseif(Auth::user()->config == 1)
   <a href="#" class="w3-bar-item w3-button">Unregistered User</a>
   @else 
+  <a href="/user/books" class="w3-bar-item w3-button">Available Book</a>
   <a href="/user/book" class="w3-bar-item w3-button">Your Book List</a>
   <a href="/user/transaction" class="w3-bar-item w3-button">Your Transaction List</a>
   <a href="/user/account" class="w3-bar-item w3-button">Your Account Balance</a>

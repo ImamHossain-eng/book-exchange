@@ -231,6 +231,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Type' => App\Models\Type::class,
         'User' => App\Models\User::class,
+        'Book' => App\Models\Book::class,
         'Carbon' => Illuminate\Support\Carbon::class,
 
     ],

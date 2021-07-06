@@ -54,11 +54,13 @@ Route::prefix('admin')->group(function(){
     Route::get('/book/{id}/edit', [BackController::class, 'book_edit'])->name('admin.book_edit');
     Route::put('/book/{id}', [BackController::class, 'book_update'])->name('admin.book_update');
     Route::get('/book/{id}', [BackController::class, 'book_show'])->name('admin.book_show');
-
+    
 });
 
 //User Route
 Route::prefix('user')->group(function(){
+    //Available books
+    Route::get('/books', [UserController::class, 'books_index'])->name('user.books_index');
     //Book Published
     Route::get('/book', [UserController::class, 'book_index'])->name('user.book_index');
     Route::get('/book/create', [UserController::class, 'book_create'])->name('user.book_create');
@@ -70,6 +72,8 @@ Route::prefix('user')->group(function(){
     //Transaction List
     Route::get('/transaction', [UserController::class, 'transaction_list'])->name('user.transaction');
     Route::get('/account', [UserController::class, 'user_acount'])->name('user.account');
+    //Add Book to user card // order a book
+    Route::post('/books/{id}', [UserController::class, 'book_card'])->name('user.book_card');
 });
 
 

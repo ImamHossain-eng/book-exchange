@@ -19,7 +19,7 @@ class CreateBooksTable extends Migration
             $table->string('image')->nullable();
             $table->string('category');
             $table->integer('price');
-            $table->boolean('confirmed')->nullable();
+            $table->integer('confirmed')->nullable();
             $table->integer('user')->nullable();
             $table->timestamps();
         });

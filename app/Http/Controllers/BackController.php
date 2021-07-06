@@ -150,7 +150,7 @@ class BackController extends Controller
         $book->category = $request->input('category');
         $book->image = $file_name;
         $book->user = 'admin';
-        $book->confirmed = true;
+        $book->confirmed = 1;
         $book->save();
         return redirect()->route('admin.book_index')->with('success', 'Successfully Created');
     }

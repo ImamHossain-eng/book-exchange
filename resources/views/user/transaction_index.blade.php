@@ -33,8 +33,8 @@
                         class="table-warning"
                         @endif>
                         <td> {{$key+1}} </td>
-                        <td> {{$trans->book_id}} </td>
-                        <td> {{$trans->price}} </td>
+                        <td> {{Book::find($trans->book_id)->name}} </td>
+                        <td> {{number_format($trans->price, 2)}} /=</td>
                         <td> 
                             @if($trans->credit == 1)
                                 <i class="fa fa-check"></i>

@@ -22,6 +22,7 @@
                         <option value="null">Choose Status</option>
                         <option value="0">Pending</option>
                         <option value="1">Published</option>
+                        <option value="2">Sold</option>
                     </select>
                 </div><br>
                 <div class="form-group">

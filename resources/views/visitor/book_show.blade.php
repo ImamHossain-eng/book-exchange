@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h4>{{$book->name}}</h4>
+                <h2 class="card-title">{{$book->name}}</h2>
                 <hr>
                 <div class="row">
                     <div class="col-sm-6">
@@ -27,7 +27,7 @@
                         <strong>Category: </strong>
                         {{Type::find($book->category)->type}} <br>
                         <strong>Price: </strong>
-                        {{number_format($book->price, 2)}} <br>
+                        {{number_format($book->price, 2)}} /= <br>
                         <br>
                         <!--if statement for confirmed-->
                         <strong>Uploaded By: </strong>
