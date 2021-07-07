@@ -9,6 +9,7 @@ use App\Models\Type;
 use App\Models\Book;
 use App\Models\Transaction;
 use App\Models\Account;
+use App\Models\Order;
 
 use Auth;
 use Image;
@@ -22,7 +23,42 @@ class UserController extends Controller
     //add book to user card
     public function book_card($id){
         $book = Book::find($id);
-        return $book;
+        if(Auth::user()->id == $book->user){
+            return redirect()->route('user.book_order')->with('error', 'We could not place your order');;
+        }
+        else{
+            $user_id = Auth::user()->id;
+            if(Order::where('user_id', '=', $user_id)->exists()){
+                $orders = Order::all();
+                foreach($orders as $order){
+                    if($order->book_id == $book->id){
+                        $ab = true;
+                        return redirect()->route('user.book_order')->with('error', 'You have already order this book');
+                    }else{
+                        $ab = false;
+                    }
+                }
+                if($ab == false){
+                    $order = new Order;
+                    $order->user_id = Auth::user()->id;
+                    $order->book_id = $book->id;
+                    $order->status = false;
+                    $order->save();
+                    return redirect()->route('user.book_order')->with('success', 'Your Order is Placed Successfully');
+                }
+            }else{
+                $order = new Order;
+                $order->user_id = Auth::user()->id;
+                $order->book_id = $book->id;
+                $order->status = false;
+                $order->save();
+                return redirect()->route('user.book_order')->with('success', 'Your Order is Placed Successfully');
+            }    
+        }
+    }
+    public function book_order(){
+        $orders = Order::where('user_id', Auth::user()->id )->get();
+        return view('user.order_index', compact('orders'));
     }
     public function books_index(){
         $books = Book::orderBy('created_at', 'desc')->where('confirmed', true)->paginate(6);

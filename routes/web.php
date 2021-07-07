@@ -74,6 +74,7 @@ Route::prefix('user')->group(function(){
     Route::get('/account', [UserController::class, 'user_acount'])->name('user.account');
     //Add Book to user card // order a book
     Route::post('/books/{id}', [UserController::class, 'book_card'])->name('user.book_card');
+    Route::get('/orders/books', [UserController::class, 'book_order'])->name('user.book_order');
 });
 
 
