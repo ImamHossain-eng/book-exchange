@@ -31,6 +31,7 @@
   @endif
   <a href="/admin/book" class="w3-bar-item w3-button">Books</a>
   <a href="/admin/book/type" class="w3-bar-item w3-button">Book Type</a>
+  <a href="/admin/books/request" class="w3-bar-item w3-button">Book Requests</a>
   <a href="/admin/feedback" class="w3-bar-item w3-button">Feedbacks</a>
   <a href="#" class="w3-bar-item w3-button">Link 2</a>
   <a href="#" class="w3-bar-item w3-button">Link 3</a>

@@ -33,10 +33,17 @@ Route::prefix('admin')->group(function(){
     Route::get('/user/admins', [BackController::class, 'admin_index'])->name('admin.admin_index');
     Route::get('/user/admin/create', [BackController::class, 'admin_create'])->name('admin.admin_create');
     Route::post('/user/admins', [BackController::class, 'admin_store'])->name('admin.admin_store');
+    Route::get('/user/admins/{id}/edit', [BackController::class, 'admin_edit'])->name('admin.admin_edit');
+    Route::put('/user/admins/{id}', [BackController::class, 'admin_update'])->name('admin.admin_update');
+    Route::delete('/user/admins/{id}', [BackController::class, 'admin_destroy'])->name('admin.admin_destroy');
     //manage users
     Route::get('/users', [BackController::class, 'user_index'])->name('admin.user_index');
     Route::get('/users/{id}/edit', [BackController::class, 'user_edit'])->name('admin.user_edit');
     Route::put('/users/{id}', [BackController::class, 'user_update'])->name('admin.user_update');
+    //see user transaction
+    Route::get('/users/{id}/transaction', [BackController::class, 'user_transaction'])->name('admin.user_transaction');
+    //see books request
+    Route::get('/books/request', [BackController::class, 'book_request'])->name('admin.book_request');
     //Feedback
     Route::get('/feedback', [BackController::class, 'feedback_index'])->name('admin.feedback');
     Route::delete('/feedback/{id}', [BackController::class, 'feedback_destroy'])->name('admin.feedback_destroy');

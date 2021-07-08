@@ -37,19 +37,21 @@
                             @endif
                         </td>
                         <td>
-                            @if(Auth::user()->is_admin==1)
+                            @if(Auth::user()->is_admin == 1)
                                 <a href="#" class="btn btn-primary">
                                     <i class="fa fa-eye"></i>
                                 </a>
                                 @if(AUth::user()->id == 1)
-                                    <a href="#" class="btn btn-success">
+                                    <a href="/admin/user/admins/{{$user->id}}/edit" class="btn btn-success">
                                         <i class="fa fa-check"></i>
                                     </a>
                                 @endif
                                 @if(Auth::user()->id == 1 && Auth::user()->id !== $user->id)
-                                    <a href="#" class="btn btn-danger">
+                                    {{Form::open(['route'=>['admin.admin_destroy', $user->id], 'method'=>'DELETE', 'style'=>'display:inline;'])}}
+                                    <button type="submit" class="btn btn-danger">
                                         <i class="fa fa-trash"></i>
-                                    </a>
+                                    </button>
+                                    {{Form::close()}}
                                 @endif
                             @endif
                         </td>

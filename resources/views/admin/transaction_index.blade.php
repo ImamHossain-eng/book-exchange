@@ -1,10 +1,11 @@
-@extends('layouts.user')
+@extends('layouts.admin')
 @section('content')
 <body>
     <div class="card">
         <div class="card-header">
             <h2 class="card-title">
-                {{Auth::user()->email}}
+                <h3>{{User::find($user)->name}}  </h3>
+                <i class="fa fa-envelope" style="margin-right: 5px;"></i><em>{{User::find($user)->email}}</em>
             </h2>
             <h4 class="card-subtitle mb-2 text-muted">
                 {{$transactions->count()}} Transactions

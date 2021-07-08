@@ -6,6 +6,7 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Transactions</th>
                 <th>Created</th>
                 <th>Status</th>
                 <th>Option</th>
@@ -22,6 +23,7 @@
                     @endif >
                     <td> {{$user->name}} </td>
                     <td> {{$user->email}} </td>
+                    <td> {{Transaction::where('user_id', $user->id)->count()}} </td>
                     <td> {{$user->created_at->diffForHumans()}} </td>
                     <td>
                         @if($user->config == '1')
@@ -33,21 +35,16 @@
                         @endif
                     </td>
                     <td>
-                        @if(Auth::user()->is_admin==1)
-                            <a href="#" class="btn btn-primary">
-                                <i class="fa fa-eye"></i>
+                        @if(Auth::user()->is_admin == 1)
+                            <a href="/admin/users/{{$user->id}}/transaction" class="btn btn-primary">
+                                <i class="fa fa-database"></i>
                             </a>
                             @if($user->is_admin !== 1)
                                 <a href="/admin/users/{{$user->id}}/edit" class="btn btn-success">
                                     <i class="fa fa-check"></i>
                                 </a>
                             @endif
-                            @if($user->is_admin == 1 && AUth::user()->id == $user->id)
-                                <a href="#" class="btn btn-success">
-                                    <i class="fa fa-check"></i>
-                                </a>
-                            @endif
-                            @if(Auth::user()->id !== $user->id && $user->is_admin !== 1)
+                            @if(Auth::user()->id == 1 && Auth::user()->is_admin == 1)
                                 <a href="#" class="btn btn-danger">
                                     <i class="fa fa-trash"></i>
                                 </a>

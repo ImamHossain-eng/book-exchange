@@ -9,6 +9,7 @@ use App\Models\Type;
 use App\Models\Book;
 use App\Models\User;
 use App\Models\Transaction;
+use App\Models\Order;
 
 
 use Image;
@@ -57,6 +58,55 @@ class BackController extends Controller
             return redirect()->route('admin.route')->with('error', 'You are not the Super Admin');
         }
     }
+    public function admin_edit($id){
+        if(Auth::user()->id == 1){
+            $user = User::find($id);
+            return view('admin.super.admin_edit', compact('user'));
+        }else{
+            return redirect()->route('admin.route')->with('error', 'You are not the Super Admin');
+        }
+    }
+    public function admin_update(Request $request, $id){
+        if(Auth::user()->id == 1){
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required'
+            ]);
+            $password = $request->input('password');
+            if($password != ''){
+                $pass = Hash::make($password);
+            }else{
+                $pass = $request->input('pass');
+            }
+            $user = User::find($id);
+            $oldType = $user->is_admin;
+            $newType = $request->input('is_admin');
+            if($newType != 'null'){
+                $type = $newType;
+            }else{
+                $type = $oldType;
+            }
+            
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = $pass;
+            $user->is_admin = $type;
+            $user->save();
+            return redirect()->route('admin.admin_index')->with('success', 'Successfully Created new Admin');
+        }else{
+            return redirect()->route('admin.route')->with('error', 'You are not the Super Admin');
+        }
+        
+    }
+    public function admin_destroy($id){
+        $user = User::find($id);
+        if($user->id !== 1){
+            $user->delete();
+            return redirect()->route('admin.admin_index')->with('error', 'Removed Done');
+        }else{
+            return redirect()->route('admin.admin_index')->with('error', 'You are master admin.');
+        }
+    }
     //User SHow
     public function user_index(){
         $users = User::where('is_admin', null)->orderBy('created_at', 'desc')->paginate(10);
@@ -86,6 +136,19 @@ class BackController extends Controller
         $user->save();
         return redirect()->route('admin.user_index')->with('warning', 'Successfully Updated');
 
+    }
+    //User Transaction
+    public function user_transaction($id){
+        $user = $id;
+        $transactions = Transaction::orderBy('created_at', 'desc')->where('user_id', $user)->get();
+        $trans_credit = Transaction::orderBy('created_at', 'desc')->where('user_id', $user)->where('credit', 1)->sum('price');
+        $trans_debit = Transaction::orderBy('created_at', 'desc')->where('user_id', $user)->where('debit', 1)->sum('price');
+        return view('admin.transaction_index', compact('transactions', 'trans_credit', 'trans_debit', 'user'));
+    }
+    //Books Request
+    public function book_request(){
+        $orders = Order::orderBy('created_at', 'desc')->paginate('10');
+        return view('admin.book_request', compact('orders'));
     }
     public function feedback_index(){
         $feedbacks = Feedback::all();
