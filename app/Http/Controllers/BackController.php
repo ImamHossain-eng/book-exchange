@@ -10,6 +10,7 @@ use App\Models\Book;
 use App\Models\User;
 use App\Models\Transaction;
 use App\Models\Order;
+use App\Models\Account;
 
 
 use Image;
@@ -150,6 +151,46 @@ class BackController extends Controller
         $orders = Order::orderBy('created_at', 'desc')->paginate('10');
         return view('admin.book_request', compact('orders'));
     }
+    //Request Review
+    public function book_request_edit($id){
+        $order = Order::find($id);
+        return view('admin.book_request_edit', compact('order'));
+    }
+    public function book_request_update(Request $request, $id){
+        $order = Order::find($id);
+        $oldStatus = $order->status;
+        $newStatus = $request->input('status');
+        if($newStatus == 'null'){
+            $status = $oldStatus;
+            return redirect()->route('admin.book_request')->with('error', 'Error while updating');
+        }elseif($newStatus == 0){
+            $status = $oldStatus;
+            return redirect()->route('admin.book_request')->with('error', 'Pending Request');
+        }elseif($newStatus == 1){
+            $order->status = $newStatus;
+            //validate the account balance of that user
+            $account = Account::where('user_id', $order->user_id)->first();
+            $user_balance = $account->balance;
+            $book_price = Book::find($order->book_id)->price;
+
+            if($user_balance > $book_price){
+                $transaction = new Transaction;
+                    $transaction->user_id = $order->user_id;
+                    $transaction->book_id = $order->book_id;
+                    $transaction->price = $book_price;
+                    $transaction->credit = false;
+                    $transaction->debit = true;
+                    $transaction->save();
+                $order->save();
+                return redirect()->route('admin.book_request')->with('success', 'Successfully Updated');
+            }else{
+                return redirect()->route('admin.book_request')->with('error', 'Insufficient Balance');
+            }
+        }else{
+            $status = null;
+            return redirect()->route('admin.book_request')->with('error', 'Error 404 not found');
+        }
+    }
     public function feedback_index(){
         $feedbacks = Feedback::all();
         //return $feedbacks;
@@ -273,7 +314,7 @@ class BackController extends Controller
                     $transaction = new Transaction;
                     $transaction->user_id = $book->user;
                     $transaction->book_id = $book->id;
-                    $transaction->price = $book->price;
+                    $transaction->price = $request->input('price');
                     $transaction->credit = true;
                     $transaction->debit = false;
                     $transaction->save();

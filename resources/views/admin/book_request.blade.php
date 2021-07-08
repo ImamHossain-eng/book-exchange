@@ -13,6 +13,7 @@
                         <th>Serial</th>
                         <th>User</th>
                         <th>Book</th>
+                        <th>Book Price</th>
                         <th>Status</th>
                         <th>Sent Request</th>
                         <th>Option</th>
@@ -24,6 +25,7 @@
                             <td> {{$key+1}} </td>
                             <td> {{User::find($order->user_id)->name}} </td>
                             <td> {{Book::find($order->book_id)->name}} </td>
+                            <td> {{Book::find($order->book_id)->price}} </td>
                             <td>
                                 @if($order->status == 0)
                                     <h6 style="color:rgba(209, 15, 15, 0.836);">Pending</h6>
@@ -33,7 +35,7 @@
                             </td>
                             <td> {{$order->created_at->diffForHumans()}} </td>
                             <td>
-                                <a href="#" class="btn btn-success">
+                                <a href="/admin/books/request/{{$order->id}}/edit" class="btn btn-success">
                                     <i class="fa fa-check"></i>                                    
                                 </a>
                                 @if(Auth::user()->id == 1 && Auth::user()->is_admin == 1)

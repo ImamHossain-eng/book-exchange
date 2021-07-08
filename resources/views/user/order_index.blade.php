@@ -12,6 +12,7 @@
                         <th>Serial</th>
                         <th>Book ID</th>
                         <th>Book Name</th>
+                        <th>Price</th>
                         <th>Order Status</th>
                         <th>Buy Request</th>
                     </tr>
@@ -24,6 +25,7 @@
                             <td> {{$key+1}} </td>
                             <td> {{$order->book_id}} </td>
                             <td> {{Book::find($order->book_id)->name}} </td>
+                            <td> {{number_format(Book::find($order->book_id)->price, 2)}} </td>
                             <td>
                                 @if($order->status == false)
                                     <h6 style="color:rgba(255, 60, 0, 0.842)">Pending</h6>

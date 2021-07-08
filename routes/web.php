@@ -44,6 +44,8 @@ Route::prefix('admin')->group(function(){
     Route::get('/users/{id}/transaction', [BackController::class, 'user_transaction'])->name('admin.user_transaction');
     //see books request
     Route::get('/books/request', [BackController::class, 'book_request'])->name('admin.book_request');
+    Route::get('/books/request/{id}/edit', [BackController::class, 'book_request_edit'])->name('admin.book_request_edit');
+    Route::put('/books/request/{id}', [BackController::class, 'book_request_update'])->name('admin.book_request_update');
     //Feedback
     Route::get('/feedback', [BackController::class, 'feedback_index'])->name('admin.feedback');
     Route::delete('/feedback/{id}', [BackController::class, 'feedback_destroy'])->name('admin.feedback_destroy');

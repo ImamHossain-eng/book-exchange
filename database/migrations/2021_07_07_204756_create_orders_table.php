@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('book_id');
-            $table->boolean('status')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }
