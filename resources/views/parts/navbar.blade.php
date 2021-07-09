@@ -12,22 +12,20 @@
             <div class="col-md-9">
                 <div class="menu_text">
                     <ul>
-                        <li><a href="index.html">HOME</a></li>                                                    
-                        <li><a href="about.html">ABOUT</a></li>
+                        <li><a href="/">HOME</a></li>                                                    
+                        <li><a href="#">ABOUT</a></li>
                         <li><a href="/books">BOOK LIST</a></li>
-                        <li><a href="gym.html">TRAINING</a></li>
-                        <li><a href="contact.html">CONTACT US</a></li>
+                        <li><a href="/contact">CONTACT US</a></li>
                         <div id="myNav" class="overlay">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class="overlay-content">
-              <a href="index.html">HOME</a>
-              <a href="about.html">ABOUT</a>
-              <a href="price.html">PRICE</a>
-              <a href="gym.html">PDF</a>
-              <a href="class.html">Open BOOK</a>
-              <a href="contact.html">CONTACT US</a>
-              <a href="#">LOGIN</a>
-              <a href="#">REGISTER</a>
+              <a href="/">HOME</a>
+              <a href="#">ABOUT</a>
+              <a href="/user/book/create">Sell BOOK</a>
+              <a href="/user/books">Buy BOOK</a>
+              <a href="/contact">CONTACT US</a>
+              <a href="/login">LOGIN</a>
+              <a href="/register">REGISTER</a>
             </div>
             </div>
             <span  style="font-size:33px;cursor:pointer; color: #ffffff; visibility: hidden;" onclick="openNav()"><img src="{{asset('contents/images/modules/toggle.png')}}" class="toggle_menu"></span>

@@ -1,7 +1,6 @@
 <div class="about_section_2 layout_padding">
     <div class="container">
         <h1 class="contact_text_2"><strong>CONTACT US</strong></h1>
-        <p class="client_long_text">It is a long established fact that a reader will be distracted by the readable</p>
     </div>
   </div>
   <div class="contact_section">

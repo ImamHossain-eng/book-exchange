@@ -8,12 +8,12 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-6">
-                       <strong> Created At: </strong>
+                       <strong> Uploaded At: </strong>
                         {{ date('F d, Y', strtotime($book->created_at))}}
                         at {{ date('g:ia', strtotime($book->created_at))}}
                     </div>
                     <div class="col-sm-6">
-                        <strong> Updated At: </strong>
+                        <strong> Approved At: </strong>
                         {{ date('F d, Y', strtotime($book->updated_at))}}
                         at {{ date('g:ia', strtotime($book->updated_at))}}
                     </div>
@@ -24,7 +24,9 @@
                     <div class="col-md-6">
                         <strong>Title/Name: </strong>
                         {{$book->name}} <br>
-                        <strong>Category: </strong>
+                        <strong>Author/Writer: </strong>
+                        {{$book->author}} <br>
+                        <strong>Category/Group: </strong>
                         {{Type::find($book->category)->type}} <br>
                         <strong>Price: </strong>
                         {{number_format($book->price, 2)}} /= <br>

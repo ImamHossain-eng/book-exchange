@@ -39,7 +39,18 @@
                         <li class="list-group-item">Group: {{Type::find($book->category)->type}}</li>
                       </ul>
                       <div class="card-body">
-                        <a href="/book/{{$book->id}}" class="bt btn-primary" style="padding: 1em;">Show Details</a>
+                        <a href="/book/{{$book->id}}" class="btn btn-primary" style="padding: 1em;">Show Details</a>
+                        
+                        
+                        <form action="{{route('user.book_card', $book->id)}}" method="POST"
+                            style="display:inline;">
+                            @csrf
+                            <button type="submit" style="display:inline;padding: 1em;" class="btn btn-success">
+                                <i class="fa fa-cart-plus" style="margin-right:.5em;"> </i>Add to Cart
+                            </button>
+                        </form>
+                       
+
                       </div>
                  </div>
             </div>

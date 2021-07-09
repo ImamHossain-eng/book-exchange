@@ -13,8 +13,12 @@ use Auth;
 class PagesController extends Controller
 {
     public function index(){
+        $boks = Book::orderby('created_at', 'desc')->where('user', 'admin')->where('confirmed', true)->get();
         $books = Book::orderby('created_at', 'desc')->where('confirmed', true)->take(3)->get();
-        return view('pages.homepage', compact('books'));
+        return view('pages.homepage', compact('boks', 'books'));
+    }
+    public function contact(){
+        return view('visitor.contact');
     }
     public function feedback(Request $request){
         $this->validate($request, [
