@@ -33,7 +33,11 @@
                         class="table-warning"
                         @endif>
                         <td> {{$key+1}} </td>
-                        <td> {{Book::find($trans->book_id)->name}} </td>
+                        <td> @if($trans->book_id !== 0) 
+                            {{Book::find($trans->book_id)->name}} 
+                            @else {{$trans->comment}}
+                            @endif
+                        </td>
                         <td> {{number_format($trans->price, 2)}} /=</td>
                         <td> 
                             @if($trans->credit == 1)

@@ -16,7 +16,7 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('book_id');
+            $table->integer('book_id')->nullable();
             $table->boolean('credit');//sell
             $table->boolean('debit');//buy
             $table->integer('price');

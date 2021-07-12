@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Transaction;
 use App\Models\Order;
 use App\Models\Account;
+use App\Models\Recharge;
 
 
 use Image;
@@ -353,5 +354,10 @@ class BackController extends Controller
     public function book_show($id){
         $book = Book::find($id);
         return view('admin.book.show', compact('book'));
+    }
+    //CashIn Request
+    public function cashin_request(){
+        $recharges = Recharge::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.cashin_index', compact('recharges'));
     }
 }

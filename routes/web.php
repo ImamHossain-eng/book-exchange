@@ -64,6 +64,8 @@ Route::prefix('admin')->group(function(){
     Route::get('/book/{id}/edit', [BackController::class, 'book_edit'])->name('admin.book_edit');
     Route::put('/book/{id}', [BackController::class, 'book_update'])->name('admin.book_update');
     Route::get('/book/{id}', [BackController::class, 'book_show'])->name('admin.book_show');
+    //CashIn Request
+    Route::get('/cashin/request', [BackController::class, 'cashin_request'])->name('admin.cashin_request');
     
 });
 
