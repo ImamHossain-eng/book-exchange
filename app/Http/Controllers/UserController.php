@@ -10,6 +10,7 @@ use App\Models\Book;
 use App\Models\Transaction;
 use App\Models\Account;
 use App\Models\Order;
+use App\Models\Recharge;
 
 use Auth;
 use Image;
@@ -236,5 +237,30 @@ class UserController extends Controller
         }else{
             return view('user.account', compact('transactions'));
         }*/
+    }
+    public function cash_in(){
+        return view('user.cash_in');
+    }
+    public function cash_in_index(){
+        $recharges = Recharge::orderBy('created_at', 'desc')->where('user_id', Auth::user()->id)->get();
+        return view('user.cash_index', compact('recharges'));
+    }
+    public function cash_in_post(Request $request){
+        $this->validate($request, [
+            'number' => 'required',
+            'amount' => 'required',
+            'trans_id' => 'required',
+            'method' => 'required'
+        ]);
+        $recharge = new Recharge;
+        $recharge->user_id = Auth::user()->id;
+        $recharge->number = $request->input('number');
+        $recharge->amount = $request->input('amount');
+        $recharge->trans_id = $request->input('trans_id');
+        $recharge->method = $request->input('method');
+        $recharge->confirmed = false;
+        $recharge->save();
+        return redirect()->route('user.cash_in_index')->with('success', 'Successfully Recharge wait for admin');
+
     }
 }

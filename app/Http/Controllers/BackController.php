@@ -151,6 +151,10 @@ class BackController extends Controller
         $orders = Order::orderBy('created_at', 'desc')->paginate('10');
         return view('admin.book_request', compact('orders'));
     }
+    public function book_request_destroy($id){
+        Order::find($id)->delete();
+        return redirect()->route('admin.book_request')->with('error', 'Removed a Book request');
+    }
     //Request Review
     public function book_request_edit($id){
         $order = Order::find($id);
@@ -171,7 +175,11 @@ class BackController extends Controller
             //validate the account balance of that user
             $account = Account::where('user_id', $order->user_id)->first();
             $user_balance = $account->balance;
-            $book_price = Book::find($order->book_id)->price;
+            $book_obj = Book::find($order->book_id);
+            $book_obj->confirmed = 2;
+            $book_obj->save();
+            $book_price = $book_obj->price;
+
 
             if($user_balance > $book_price){
                 $transaction = new Transaction;
@@ -225,7 +233,7 @@ class BackController extends Controller
         return redirect()->route('admin.book_type')->with('error', 'One Record Removed');
     }
     public function book_index(){
-        $books = Book::orderBy('created_at', 'desc')->paginate(5);
+        $books = Book::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.book.index', compact('books'));
     }
     public function book_create(){

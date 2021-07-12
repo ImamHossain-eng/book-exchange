@@ -39,9 +39,12 @@
                                     <i class="fa fa-check"></i>                                    
                                 </a>
                                 @if(Auth::user()->id == 1 && Auth::user()->is_admin == 1)
-                                <a href="#" class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>                                    
-                                </a>
+                                
+                                {{Form::open(['method'=>'DELETE', 'route'=>['admin.book_request_destroy',$order->id],'style'=>'display:inline;']) }}
+                                <button type="submit" style="display:inline;" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                {{Form::close()}}
                                 @endif
                             </td>
                         </tr>

@@ -46,6 +46,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/books/request', [BackController::class, 'book_request'])->name('admin.book_request');
     Route::get('/books/request/{id}/edit', [BackController::class, 'book_request_edit'])->name('admin.book_request_edit');
     Route::put('/books/request/{id}', [BackController::class, 'book_request_update'])->name('admin.book_request_update');
+    Route::delete('/books/request/{id}', [BackController::class, 'book_request_destroy'])->name('admin.book_request_destroy');
     //Feedback
     Route::get('/feedback', [BackController::class, 'feedback_index'])->name('admin.feedback');
     Route::delete('/feedback/{id}', [BackController::class, 'feedback_destroy'])->name('admin.feedback_destroy');
@@ -54,7 +55,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/book/type', [BackController::class, 'book_type'])->name('admin.book_type');
     Route::get('/book/type/create', [BackController::class, 'type_create'])->name('admin.type_create');
     Route::post('/book/type', [BackController::class, 'type_store'])->name('admin.type_store');
-    Route::delete('/book/type/{id}', [BackCOntroller::class, 'type_destroy'])->name('admin.type_destroy');
+    Route::delete('/book/type/{id}', [BackController::class, 'type_destroy'])->name('admin.type_destroy');
     //Book CRUD
     Route::get('/book', [BackController::class, 'book_index'])->name('admin.book_index');
     Route::get('/book/create', [BackController::class, 'book_create'])->name('admin.book_create');
@@ -84,6 +85,10 @@ Route::prefix('user')->group(function(){
     //Add Book to user card // order a book
     Route::post('/books/{id}', [UserController::class, 'book_card'])->name('user.book_card');
     Route::get('/orders/books', [UserController::class, 'book_order'])->name('user.book_order');
+    //Cash In
+    Route::get('/cash_in', [UserController::class, 'cash_in'])->name('user.cash_in');
+    Route::get('/cash_in/request', [UserController::class, 'cash_in_index'])->name('user.cash_in_index');
+    Route::post('/cash_in/request', [UserController::class, 'cash_in_post'])->name('user.cash_in_post');
 });
 
 

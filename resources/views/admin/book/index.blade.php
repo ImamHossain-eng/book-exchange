@@ -22,10 +22,14 @@
                 </thead>
                 <tbody>
                     @forelse($books as $key => $book)
-                        <tr @if($book->user !== 'admin') 
+                        <tr @if($book->confirmed == 1) 
+                            class="table-success"
+                            @elseif($book->confirmed == 0)
                             class="table-danger"
-                            @else 
+                            @elseif($book->confirmed == 2)
                             class="table-warning"
+                            @else 
+                            class="table-info"
                             @endif
                             >
                             <td> {{$key+1}} </td>

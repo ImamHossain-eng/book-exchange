@@ -3,20 +3,27 @@
 <body>
     <div class="card">
         <div class="card-header">
-            <div class="card-title">
-                <h2>{{User::find($account->user_id)->name}}</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-title">
+                        <h2>{{User::find($account->user_id)->name}}</h2>
+                    </div>
+                    <br>
+                    <h6 class="card-subtitle">Total
+                            @if($transactions > 1) 
+                                {{$transactions}} Transactions
+                            @else 
+                                {{$transactions}} Transaction
+                            @endif
+                    </h6>
+                    <p class="card-text"><br>
+                       <a href="/user/transaction" class="btn btn-outline-secondary">See All Transaction</a>
+                    </p>
+                </div>
+                <div class="col-md-6"><br>
+                    <a href="/user/cash_in" class="btn btn-warning">Recharge Account / Cash In</a>
+                </div>
             </div>
-            <br>
-            <h6 class="card-subtitle">Total
-                    @if($transactions > 1) 
-                        {{$transactions}} Transactions
-                    @else 
-                        {{$transactions}} Transaction
-                    @endif
-            </h6>
-            <p class="card-text"><br>
-               <a href="/user/transaction" class="btn btn-outline-secondary">See All Transaction</a>
-            </p>
         </div>
         <div class="card-body">
             <table class="table">

@@ -30,10 +30,11 @@
   <a href="#" class="w3-bar-item w3-button">Unregistered User</a>
   @else 
   <a href="/user/books" class="w3-bar-item w3-button">Available Book</a>
-  <a href="/user/book" class="w3-bar-item w3-button">Your Book List</a>
-  <a href="/user/orders/books" class="w3-bar-item w3-button">Your Order List</a>
-  <a href="/user/transaction" class="w3-bar-item w3-button">Your Transaction List</a>
-  <a href="/user/account" class="w3-bar-item w3-button">Your Account Balance</a>
+  <a href="/user/book" class="w3-bar-item w3-button">Book List</a>
+  <a href="/user/orders/books" class="w3-bar-item w3-button">Order List</a>
+  <a href="/user/transaction" class="w3-bar-item w3-button">Transaction List</a>
+  <a href="/user/account" class="w3-bar-item w3-button">Account Balance</a>
+  <a href="/user/cash_in/request" class="w3-bar-item w3-button">Recharge Request</a>
   <a href="#" class="w3-bar-item w3-button">Registered Users</a>
   @endif
   <div>
