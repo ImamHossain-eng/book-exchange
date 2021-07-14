@@ -241,9 +241,16 @@ class UserController extends Controller
     public function cash_in(){
         return view('user.cash_in');
     }
+    public function cash_out(){
+        return view('user.cash_out');
+    }
     public function cash_in_index(){
-        $recharges = Recharge::orderBy('created_at', 'desc')->where('user_id', Auth::user()->id)->get();
+        $recharges = Recharge::orderBy('created_at', 'desc')->where('type', 'cashin')->where('user_id', Auth::user()->id)->get();
         return view('user.cash_index', compact('recharges'));
+    }
+    public function cash_out_index(){
+        $recharges = Recharge::orderBy('created_at', 'desc')->where('type', 'cashout')->where('user_id', Auth::user()->id)->get();
+        return view('user.cash_out_index', compact('recharges'));
     }
     public function cash_in_post(Request $request){
         $this->validate($request, [
@@ -259,8 +266,25 @@ class UserController extends Controller
         $recharge->trans_id = $request->input('trans_id');
         $recharge->method = $request->input('method');
         $recharge->confirmed = false;
+        $recharge->type = 'cashin';
         $recharge->save();
         return redirect()->route('user.cash_in_index')->with('success', 'Successfully Recharge wait for admin');
-
+    }
+    public function cash_out_post(Request $request){
+        $this->validate($request, [
+            'number' => 'required',
+            'amount' => 'required',
+            'method' => 'required'
+        ]);
+        $recharge = new Recharge;
+        $recharge->user_id = Auth::user()->id;
+        $recharge->number = $request->input('number');
+        $recharge->amount = $request->input('amount');
+        $recharge->trans_id = time();
+        $recharge->method = $request->input('method');
+        $recharge->confirmed = false;
+        $recharge->type = 'cashout';
+        $recharge->save();
+        return redirect()->route('user.cash_out_index')->with('success', 'Successfully Recharge wait for admin');
     }
 }

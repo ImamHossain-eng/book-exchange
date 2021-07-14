@@ -186,6 +186,7 @@ class BackController extends Controller
                 $transaction = new Transaction;
                     $transaction->user_id = $order->user_id;
                     $transaction->book_id = $order->book_id;
+                    $transaction->recharge_id = 0;
                     $transaction->price = $book_price;
                     $transaction->credit = false;
                     $transaction->debit = true;
@@ -323,6 +324,7 @@ class BackController extends Controller
                     $transaction = new Transaction;
                     $transaction->user_id = $book->user;
                     $transaction->book_id = $book->id;
+                    $transaction->recharge_id = 0;
                     $transaction->price = $request->input('price');
                     $transaction->credit = true;
                     $transaction->debit = false;
@@ -357,7 +359,144 @@ class BackController extends Controller
     }
     //CashIn Request
     public function cashin_request(){
-        $recharges = Recharge::orderBy('created_at', 'desc')->paginate(10);
+        $recharges = Recharge::orderBy('created_at', 'desc')->where('type', 'cashin')->paginate(10);
         return view('admin.cashin_index', compact('recharges'));
+    }
+    public function cashout_request(){
+        $recharges = Recharge::orderBy('created_at', 'desc')->where('type', 'cashout')->paginate(10);
+        return view('admin.cashout_index', compact('recharges'));
+    }
+    public function cashin_edit($id){
+        $recharge = Recharge::find($id);
+        return view('admin.cashin_edit', compact('recharge'));
+    }
+    public function cashout_edit($id){
+        $recharge = Recharge::find($id);
+        return view('admin.cashout_edit', compact('recharge'));
+    }
+    public function cashin_update(Request $request, $id){
+        $recharge = Recharge::find($id);
+        $oldConf = $recharge->confirmed;
+        $newConf = $request->input('confirmed');
+        //confirmation validation
+        if($newConf == 1){
+            $conf = true;
+             //effect to the transaction table
+             $trans = Transaction::all();
+             //CHeck if transaction exists
+             foreach($trans as $tran){
+                 if($tran->recharge_id !== $recharge->id && $tran->user_id !== $recharge->user_id){
+                     $ab = true;
+                 }else{
+                     $ab = false;
+                 }
+             }
+             if($ab == true){
+                $transaction = new Transaction;
+                $transaction->user_id = $recharge->user_id;
+                $transaction->book_id = 0;
+                $transaction->recharge_id = $recharge->id;
+                $transaction->price = $recharge->amount;
+                $transaction->credit = true;
+                $transaction->debit = false;
+                $transaction->save();
+             }elseif($ab == false){
+                return redirect()->route('admin.cashin_request')->with('error', 'You have already confirmed this Recharge');
+             }else{
+                return redirect()->route('admin.cashin_request')->with('error', 'Transaction Failed');
+             }
+            
+        }elseif($newConf == 0){
+            $conf = $oldConf;
+        }else{
+            $conf = $oldConf;
+        }
+        $recharge->confirmed = $conf;
+        $recharge->save();
+        return redirect()->route('admin.cashin_request')->with('warning', 'Recharge Confirmed Successfully');     
+    }
+    public function cashout_update(Request $request, $id){
+        $recharge = Recharge::find($id);
+        $oldConf = $recharge->confirmed;
+        $newConf = $request->input('confirmed');
+        $tr_id = $request->input('trans_id');
+        //confirmation validation
+        if($newConf == 1){
+            $conf = true;
+            if(Transaction::where('recharge_id', '=', $recharge->id)->exists()) {
+                return redirect()->route('admin.cashout_request')->with('error', 'You have already confirmed this Recharge');
+             }else{
+                $transaction = new Transaction;
+                $transaction->user_id = $recharge->user_id;
+                $transaction->book_id = 0;
+                $transaction->recharge_id = $recharge->id;
+                $transaction->price = $recharge->amount;
+                $transaction->credit = false;
+                $transaction->debit = true;
+                $transaction->save(); 
+             }
+            
+        }elseif($newConf == 0){
+            $conf = $oldConf;
+        }else{
+            $conf = $oldConf;
+        }
+        $recharge->confirmed = $conf;
+        $recharge->trans_id = $tr_id;
+        $recharge->save();
+        return redirect()->route('admin.cashout_request')->with('warning', 'Recharge Confirmed Successfully');
+    }
+    public function cashout1_update(Request $request, $id){
+        $recharge = Recharge::find($id);
+        $oldConf = $recharge->confirmed;
+        $newConf = $request->input('confirmed');
+        //confirmation validation
+        if($newConf == 1){
+            $conf = true;
+             //effect to the transaction table
+             $trans = Transaction::all();
+             //CHeck if transaction exists
+             foreach($trans as $tran){
+                 if($tran->recharge_id !== $recharge->id && $tran->user_id !== $recharge->user_id){
+                     $ab = true;
+                 }else{
+                     $ab = false;
+                 }
+             }
+             if($ab == true){
+                $transaction = new Transaction;
+                $transaction->user_id = $recharge->user_id;
+                $transaction->book_id = 0;
+                $transaction->recharge_id = $recharge->id;
+                $transaction->price = $recharge->amount;
+                $transaction->credit = true;
+                $transaction->debit = false;
+                $transaction->save();
+             }elseif($ab == false){
+                return redirect()->route('admin.cashin_request')->with('error', 'You have already confirmed this Recharge');
+             }else{
+                return redirect()->route('admin.cashin_request')->with('error', 'Transaction Failed');
+             }
+            
+        }elseif($newConf == 0){
+            $conf = $oldConf;
+        }else{
+            $conf = $oldConf;
+        }
+        $recharge->confirmed = $conf;
+        $recharge->save();
+        return redirect()->route('admin.cashin_request')->with('warning', 'Recharge Confirmed Successfully');
+    }
+    public function cashin_destroy($id){
+        $recharge = Recharge::find($id);
+        $conf = $recharge->confirmed;
+        if($conf == 1){
+            $recharge->delete();
+            return redirect()->route('admin.cashin_request')->with('error', 'One Recharge Record Removed'); 
+        }elseif($conf == 0){
+            return redirect()->route('admin.cashin_request')->with('error', 'You can not delete this until confirmation');
+        }else{
+            return redirect()->route('admin.cashin_request')->with('error', 'Unknown Transaction');
+        }
     }
 }

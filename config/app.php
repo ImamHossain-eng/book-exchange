@@ -233,6 +233,7 @@ return [
         'User' => App\Models\User::class,
         'Book' => App\Models\Book::class,
         'Transaction' => App\Models\Transaction::class,
+        'Recharge' => App\Models\Recharge::class,
 
     ],
 

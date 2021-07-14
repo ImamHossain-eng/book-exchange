@@ -35,6 +35,7 @@
   <a href="/user/transaction" class="w3-bar-item w3-button">Transaction List</a>
   <a href="/user/account" class="w3-bar-item w3-button">Account Balance</a>
   <a href="/user/cash_in/request" class="w3-bar-item w3-button">Recharge Request</a>
+  <a href="/user/cash_out/request" class="w3-bar-item w3-button">Payment Request</a>
   <a href="#" class="w3-bar-item w3-button">Registered Users</a>
   @endif
   <div>

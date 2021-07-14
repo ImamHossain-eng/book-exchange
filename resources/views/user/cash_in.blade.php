@@ -7,6 +7,7 @@
                 Recharge Your Account / Cash In to Your Account
             </h2>
             <a href="/user/cash_in/request" class="btn btn-info">See Your Cash In / Recharge Request</a>
+            
             <h6 class="card-sub-title" style="color:rgba(255, 0, 0, 0.753);">
                 Send Money to the following Personal Number
             </h6>
@@ -36,10 +37,10 @@
             </div><br>
             <div class="form-group">
                 <select name="method" id="" class="form-control">
-                    <option value="bkash">Bkash</option>
-                    <option value="nagat">Nagat</option>
-                    <option value="rocket">Rocket</option>
-                    <option value="upay">Upay</option>
+                    <option value="Bkash">Bkash</option>
+                    <option value="Nagat">Nagat</option>
+                    <option value="Rocket">Rocket</option>
+                    <option value="Upay">Upay</option>
                 </select>
             </div><br>
             <input type="submit" value="Send Details" class="btn btn-primary">

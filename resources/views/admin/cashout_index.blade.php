@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
-                Cash In / Recharge Request 
+                Cash Out / Payment Request 
             </h3>
         </div>
         <div class="card-body">
@@ -44,7 +44,7 @@
                             </td>
                             <td> {{$recharge->created_at->diffForHumans()}} </td>
                             <td>
-                                <a href="/admin/cashin/request/{{$recharge->id}}" class="btn btn-success">
+                                <a href="/admin/cashout/request/{{$recharge->id}}" class="btn btn-success">
                                     <i class="fa fa-check"></i>
                                 </a>
                                 {{Form::open(['method' => 'DELETE', 'style' =>'display:inline;', 'route' => ['admin.cashin_destroy', $recharge->id]])}}

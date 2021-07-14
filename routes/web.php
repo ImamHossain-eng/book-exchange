@@ -27,7 +27,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'handleAdmin'])->middleware('admin')->name('admin.route');
 
-Route::prefix('admin')->group(function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'handleAdmin']);
     //Manage Admins
     Route::get('/user/admins', [BackController::class, 'admin_index'])->name('admin.admin_index');
@@ -66,6 +66,12 @@ Route::prefix('admin')->group(function(){
     Route::get('/book/{id}', [BackController::class, 'book_show'])->name('admin.book_show');
     //CashIn Request
     Route::get('/cashin/request', [BackController::class, 'cashin_request'])->name('admin.cashin_request');
+    Route::get('/cashout/request', [BackController::class, 'cashout_request'])->name('admin.cashout_request');
+    Route::get('/cashin/request/{id}', [BackController::class, 'cashin_edit'])->name('admin.cashin_edit');
+    Route::get('/cashout/request/{id}', [BackController::class, 'cashout_edit'])->name('admin.cashout_edit');
+    Route::put('/cashin/request/{id}', [BackController::class, 'cashin_update'])->name('admin.cashin_update');
+    Route::put('/cashout/request/{id}', [BackController::class, 'cashout_update'])->name('admin.cashout_update');
+    Route::delete('/cashin/request/{id}', [BackController::class, 'cashin_destroy'])->name('admin.cashin_destroy');
     
 });
 
@@ -91,6 +97,9 @@ Route::prefix('user')->group(function(){
     Route::get('/cash_in', [UserController::class, 'cash_in'])->name('user.cash_in');
     Route::get('/cash_in/request', [UserController::class, 'cash_in_index'])->name('user.cash_in_index');
     Route::post('/cash_in/request', [UserController::class, 'cash_in_post'])->name('user.cash_in_post');
+    Route::get('/cash_out', [UserController::class, 'cash_out'])->name('user.cash_out');
+    Route::post('/cash_out', [UserController::class, 'cash_out_post'])->name('user.cash_out_post');
+    Route::get('/cash_out/request', [UserController::class, 'cash_out_index'])->name('user.cash_out_index');
 });
 
 

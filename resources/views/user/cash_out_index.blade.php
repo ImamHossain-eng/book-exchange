@@ -1,34 +1,34 @@
-@extends('layouts.admin')
+@extends('layouts.user')
 @section('content')
 <body>
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
-                Cash In / Recharge Request 
+                Cash Out / Payment Request 
             </h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="/user/cash_out" class="btn btn-info">Recharge Account / Cash Out</a>                </div>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-responsive table-hover table-striped table-border">
                 <thead>
                     <tr>
                         <th>Serial</th>
-                        <th>User Name</th>
-                        <th>User Email</th>
                         <th>Sender Number</th>
                         <th>Amount</th>
                         <th>Transaction ID</th>
                         <th>Via</th>
                         <th>Status</th>
                         <th>Requested at</th>
-                        <th>Option</th>
+                        <th>Confirmed at</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($recharges as $key => $recharge)
                         <tr>
                             <td> {{$key+1}} </td>
-                            <td> {{User::find($recharge->user_id)->name}} </td>
-                            <td> {{User::find($recharge->user_id)->email}} </td>
                             <td> {{$recharge->number}} </td>
                             <td> {{$recharge->amount}} </td>
                             <td> {{$recharge->trans_id}} </td>
@@ -43,20 +43,15 @@
                                 @endif
                             </td>
                             <td> {{$recharge->created_at->diffForHumans()}} </td>
-                            <td>
-                                <a href="/admin/cashin/request/{{$recharge->id}}" class="btn btn-success">
-                                    <i class="fa fa-check"></i>
-                                </a>
-                                {{Form::open(['method' => 'DELETE', 'style' =>'display:inline;', 'route' => ['admin.cashin_destroy', $recharge->id]])}}
-                                <button class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                                {{Form::close()}}
-                            </td>
+                            <td>@if($recharge->created_at == $recharge->updated_at)
+                                <h5>Processing</h5> 
+                                @else
+                                {{$recharge->updated_at->diffForHumans()}} </td>
+                                @endif
                         </tr>
                     @empty 
                         <tr>
-                            <td colspan="6">
+                            <td colspan="8">
                                 <center>No Transaction Yet</center>
                             </td>
                         </tr>

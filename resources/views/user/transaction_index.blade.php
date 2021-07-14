@@ -19,6 +19,7 @@
                     <tr>
                         <th>Serial No</th>
                         <th>Book</th>
+                        <th>Recharge Method</th>
                         <th>Price</th>
                         <th>Credit</th>
                         <th>Debit</th>
@@ -35,7 +36,14 @@
                         <td> {{$key+1}} </td>
                         <td> @if($trans->book_id !== 0) 
                             {{Book::find($trans->book_id)->name}} 
-                            @else {{$trans->comment}}
+                            @else 
+                            <i class="fa fa-times"></i>
+                            @endif
+                        </td>
+                        <td> @if($trans->recharge_id !== "")
+                                {{Recharge::find($trans->recharge_id)->method}}
+                            @else 
+                            <i class="fa fa-times"></i>
                             @endif
                         </td>
                         <td> {{number_format($trans->price, 2)}} /=</td>
@@ -62,7 +70,7 @@
                         </td>
                     </tr>
                     @endforelse
-                    <tr class="table-danger">
+                    <tr class="table-info">
                         <td></td>
                         <td></td>
                         <td>Mean Balance: {{number_format($trans_credit-$trans_debit, 2)}}/=</td>

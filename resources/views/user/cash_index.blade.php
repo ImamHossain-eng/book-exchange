@@ -23,6 +23,7 @@
                         <th>Via</th>
                         <th>Status</th>
                         <th>Requested at</th>
+                        <th>Confirmed at</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,10 +44,15 @@
                                 @endif
                             </td>
                             <td> {{$recharge->created_at->diffForHumans()}} </td>
+                            <td>@if($recharge->created_at == $recharge->updated_at)
+                                <h5>Processing</h5> 
+                                @else
+                                {{$recharge->updated_at->diffForHumans()}} </td>
+                                @endif
                         </tr>
                     @empty 
                         <tr>
-                            <td colspan="6">
+                            <td colspan="8">
                                 <center>No Transaction Yet</center>
                             </td>
                         </tr>

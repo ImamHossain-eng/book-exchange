@@ -21,7 +21,8 @@
                     </p>
                 </div>
                 <div class="col-md-6"><br>
-                    <a href="/user/cash_in" class="btn btn-warning">Recharge Account / Cash In</a>
+                    <a href="/user/cash_in" class="btn btn-warning">Recharge Account / Cash In</a><hr>
+                    <a href="/user/cash_out" class="btn btn-info">Recharge Account / Cash Out</a>
                 </div>
             </div>
         </div>
