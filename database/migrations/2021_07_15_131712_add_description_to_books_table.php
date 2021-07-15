@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRechargeIdToTransactionsTable extends Migration
+class AddDescriptionToBooksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddRechargeIdToTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->integer('recharge_id');
+        Schema::table('books', function (Blueprint $table) {
+            $table->mediumText('description')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddRechargeIdToTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->dropColumn('recharge_id');
+        Schema::table('books', function (Blueprint $table) {
+            $table->dropColumn('description');
         });
     }
 }

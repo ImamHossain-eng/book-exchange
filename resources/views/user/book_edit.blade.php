@@ -26,6 +26,10 @@
                         <option value="{{$type->id}}"> {{$type->type}} </option>
                     @endforeach
                 </select><br>
+                <div class="from-group">
+                    <label for="description">Book Description</label>
+                    <textarea name="description" id="ckview" cols="30" rows="10"> {{$book->description}} </textarea>
+                </div><br>
                 <input type="submit" value="Save" class="btn btn-primary">
             {{Form::close()}}
         </div>

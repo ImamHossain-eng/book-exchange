@@ -45,16 +45,20 @@
                                 </a>
                             @endif
                             @if(Auth::user()->id == 1 && Auth::user()->is_admin == 1)
-                                <a href="#" class="btn btn-danger">
+                                {{Form::open(['method'=>'DELETE', 'route'=>['admin.user_destroy',$user->id],'style'=>'display:inline;']) }}
+                                <button type="submit" style="display:inline;" class="btn btn-danger">
                                     <i class="fa fa-trash"></i>
-                                </a>
+                                </button>
+                                {{Form::close()}}
                             @endif
                         @endif
                     </td>
                 </tr>                    
             @empty
-                <tr>
-                    <td colspan="5">COming Soon</td>
+                <tr class="table-warning">
+                    <td colspan="6">
+                        <center>Coming Soon</center>
+                    </td>
                 </tr>
                     
             @endforelse

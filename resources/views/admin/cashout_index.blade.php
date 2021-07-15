@@ -13,8 +13,8 @@
                     <tr>
                         <th>Serial</th>
                         <th>User Name</th>
-                        <th>User Email</th>
-                        <th>Sender Number</th>
+                        <th>User Email</th>                        
+                        <th>Receiver Mobile Number</th>
                         <th>Amount</th>
                         <th>Transaction ID</th>
                         <th>Via</th>
@@ -29,6 +29,7 @@
                             <td> {{$key+1}} </td>
                             <td> {{User::find($recharge->user_id)->name}} </td>
                             <td> {{User::find($recharge->user_id)->email}} </td>
+                            
                             <td> {{$recharge->number}} </td>
                             <td> {{$recharge->amount}} </td>
                             <td> {{$recharge->trans_id}} </td>
@@ -56,7 +57,7 @@
                         </tr>
                     @empty 
                         <tr>
-                            <td colspan="6">
+                            <td colspan="10">
                                 <center>No Transaction Yet</center>
                             </td>
                         </tr>

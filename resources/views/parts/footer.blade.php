@@ -3,13 +3,14 @@
       <div class="container">
         <div class="row map_addres">
           <div class="col-sm-12 col-lg-4">
-            <div class="map_text"><img src="{{asset('contents/images/home/map-icon.png')}}"><span class="map_icon">No.123 Chalingt Gates, Supper market New York</span></div>
+            <div class="map_text"><img src="{{asset('contents/images/home/map-icon.png')}}"><span class="map_icon">Hamdard Nagar
+             <br> Gazaria, Munshiganj-1510 </span></div>
           </div>
                 <div class="col-sm-12 col-lg-4">
-                  <div class="map_text"><img src="{{asset('contents/images/home/phone-icon.png')}}"><span class="map_icon">( +71 7986543234 )</span></div>
+                  <div class="map_text"><img src="{{asset('contents/images/home/phone-icon.png')}}"><span class="map_icon"> +8801632251728 <br> +8801863575620 </span></div>
                 </div>
           <div class="col-sm-12 col-lg-4">
-            <div class="map_text"><img src="{{asset('contents/images/home/email-icon.png')}}"><span class="map_icon">demo@gmail.com</span></div>
+            <div class="map_text"><img src="{{asset('contents/images/home/email-icon.png')}}"><span class="map_icon">hasantanvir0161@gmail.com <br> </span></div>
           </div>
         </div>
         <div class="social_icon">

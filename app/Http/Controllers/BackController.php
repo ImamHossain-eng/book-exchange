@@ -114,6 +114,21 @@ class BackController extends Controller
         $users = User::where('is_admin', null)->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.super.users', compact('users'));
     }
+    public function user_destroy($id){
+        $user = User::find($id);
+        if($user->is_admin !== 1){
+            $recharges = Recharge::where('user_id', $id)->get();
+            foreach($recharges as $recharge){
+                if($recharge->user_id == $user->id){
+                    $recharge->delete();
+                }
+            }
+            $user->delete();
+            return redirect()->route('admin.user_index')->with('error', 'Removed Done');
+        }else{
+            return redirect()->route('admin.user_index')->with('error', 'Failed User type admin.');
+        }
+    }
     public function user_edit($id){
         $user = User::find($id);
         return view('admin.super.user_edit', compact('user'));
@@ -262,8 +277,9 @@ class BackController extends Controller
         $book->author = $request->input('author');
         $book->price = $request->input('price');
         $book->category = $request->input('category');
+        $book->description = $request->input('description');
         $book->image = $file_name;
-        $book->user = 'admin';
+        $book->user = Auth::user()->id;
         $book->confirmed = 1;
         $book->save();
         return redirect()->route('admin.book_index')->with('success', 'Successfully Created');
@@ -347,6 +363,7 @@ class BackController extends Controller
         $book->name = $request->input('name');
         $book->author = $request->input('author');
         $book->price = $request->input('price');
+        $book->description = $request->input('description');
         $book->category = $type;
         $book->image = $file_name;
         $book->confirmed = $confirm;
@@ -385,7 +402,7 @@ class BackController extends Controller
              $trans = Transaction::all();
              //CHeck if transaction exists
              foreach($trans as $tran){
-                 if($tran->recharge_id !== $recharge->id && $tran->user_id !== $recharge->user_id){
+                 if($tran->recharge_id !== $recharge->id){
                      $ab = true;
                  }else{
                      $ab = false;

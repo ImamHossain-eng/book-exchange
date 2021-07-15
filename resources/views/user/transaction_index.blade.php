@@ -40,7 +40,7 @@
                             <i class="fa fa-times"></i>
                             @endif
                         </td>
-                        <td> @if($trans->recharge_id !== "")
+                        <td> @if($trans->recharge_id !== 0)
                                 {{Recharge::find($trans->recharge_id)->method}}
                             @else 
                             <i class="fa fa-times"></i>
@@ -77,7 +77,7 @@
                         <td>Total Credit: {{number_format($trans_credit, 2)}}/=</td>
                         <td>Total Debit: {{number_format($trans_debit, 2)}}/=</td>
                         <td></td>
-
+                        <td></td>
                     </tr>
                 </tbody>
             </table>

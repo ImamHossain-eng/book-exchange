@@ -71,7 +71,7 @@
                         </tr>
                     @empty
                         <tr class="table-warning">
-                            <td colspan="6">
+                            <td colspan="8">
                                 <center>Coming Soon</center>
                             </td>
                         </tr>

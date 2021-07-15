@@ -40,6 +40,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::get('/users', [BackController::class, 'user_index'])->name('admin.user_index');
     Route::get('/users/{id}/edit', [BackController::class, 'user_edit'])->name('admin.user_edit');
     Route::put('/users/{id}', [BackController::class, 'user_update'])->name('admin.user_update');
+    Route::delete('/users/{id}', [BackController::class, 'user_destroy'])->name('admin.user_destroy');
     //see user transaction
     Route::get('/users/{id}/transaction', [BackController::class, 'user_transaction'])->name('admin.user_transaction');
     //see books request

@@ -112,6 +112,7 @@ class UserController extends Controller
             $book->name = $request->input('name');
             $book->author = $request->input('author');
             $book->price = $request->input('price');
+            $book->description = $request->input('description');
             $book->category = $category;
             $book->image = $file_name;
             $book->save();
@@ -149,6 +150,7 @@ class UserController extends Controller
         $book->author = $request->input('author');
         $book->price = $request->input('price');
         $book->category = $request->input('category');
+        $book->description = $request->input('description');
         $book->image = $file_name;
         $book->user = Auth::user()->id;
         $book->confirmed = false;

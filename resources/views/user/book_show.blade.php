@@ -36,11 +36,13 @@
                     <span><h6>Pending</h6></span>
                     @endif
                     <strong>Uploaded By: </strong>
-                    @if($book->user == 0)
+                    @if(User::find($book->user)->is_admin == 1)
                     <span><h6>Admin</h6></span>
                     @else 
                     <span><h6>{{User::find($book->user)->email}}</h6></span>
                     @endif
+                    <strong>Book Description: </strong>
+                        <p style="padding-top:0px;">{!!$book->description!!}</p>
                 </div>
                 <div class="col-md-6">
                     <img src="{{asset('/contents/images/book/'.$book->image)}}" alt="{{$book->image}}">
