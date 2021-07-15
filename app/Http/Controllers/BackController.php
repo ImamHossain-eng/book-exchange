@@ -123,6 +123,18 @@ class BackController extends Controller
                     $recharge->delete();
                 }
             }
+            $books = Book::where('user', $id)->get();
+            foreach($books as $book){
+                if($book->user == $user->id){
+                    $book->delete();
+                }
+            }
+            $orders = Order::where('user_id', $id)->get();
+            foreach($orders as $order){
+                if($order->user_id == $user->id){
+                    $order->delete();
+                }
+            }
             $user->delete();
             return redirect()->route('admin.user_index')->with('error', 'Removed Done');
         }else{
@@ -271,7 +283,6 @@ class BackController extends Controller
         }else{
             $file_name = 'no_image.png';
         }
-
         $book = new Book;
         $book->name = $request->input('name');
         $book->author = $request->input('author');

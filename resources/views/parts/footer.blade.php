@@ -10,7 +10,7 @@
                   <div class="map_text"><img src="{{asset('contents/images/home/phone-icon.png')}}"><span class="map_icon"> +8801632251728 <br> +8801863575620 </span></div>
                 </div>
           <div class="col-sm-12 col-lg-4">
-            <div class="map_text"><img src="{{asset('contents/images/home/email-icon.png')}}"><span class="map_icon">hasantanvir0161@gmail.com <br> </span></div>
+            <div class="map_text"><img src="{{asset('contents/images/home/email-icon.png')}}"><span class="map_icon">hasantanvir0161@gmail.com <br> mdsaifulislam31517@gmail.com</span></div>
           </div>
         </div>
         <div class="social_icon">

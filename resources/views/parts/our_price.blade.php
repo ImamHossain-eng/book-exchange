@@ -1,6 +1,6 @@
 <div class="our_price_section layout_padding">
     <div class="container">
-      <h1 class="our_price"><strong>OUR PRICE</strong></h1>
+      <h1 class="our_price"><strong>OUR SERVICE</strong></h1>
       <p class="client_long_text">
         Basically we provide the following  2 services.
       </p>
@@ -13,8 +13,7 @@
                   <P class="access_text">Login to your Account</P>
                   <P class="access_text">Upload Book </P>
                   <P class="access_text">Wait for Admin Approval</P>
-                  <P class="access_text">After transaction check your account balance</P>
-                  <P class="free_text">Charge: BDT 20/= Per Book</P>
+                  <P class="free_text">After transaction check your account balance</P>
                 </div>
                 <div class="select_boton">
                     <div class="select_bt"><a href="/user/book/create">SELECT PLAN</a></div>
@@ -27,8 +26,7 @@
                   <P class="access_text">Login to your Account</P>
                   <P class="access_text">Order Book </P>
                   <P class="access_text">Wait for Admin Approval</P>
-                  <P class="access_text">After Confirmation check your transaction list</P>
-                  <P class="free_text">Charge: BDT 40/= Per Book</P>
+                  <P class="free_text">After Confirmation check your transaction list</P>
                 </div>
                 <div class="select_boton">
                     <div class="premium_bt"><a href="/user/books">SELECT PLAN</a></div>

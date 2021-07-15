@@ -16,6 +16,14 @@
                         <li><a href="#">ABOUT</a></li>
                         <li><a href="/books">BOOK LIST</a></li>
                         <li><a href="/contact">CONTACT US</a></li>
+                        @if(Auth::check())
+                            @if(Auth::user()->is_admin == 1)
+                            <li><a href="/admin/home">Admin Dashboard</a></li>
+                            @else
+                            <li><a href="/home">User Dashboard</a></li>
+                            @endif
+                        @endif
+                        
                         <div id="myNav" class="overlay">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class="overlay-content">

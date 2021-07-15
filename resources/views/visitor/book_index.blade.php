@@ -36,7 +36,14 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Price: {{number_format($book->price, 2)}}</li>
-                        <li class="list-group-item">Group: {{Type::find($book->category)->type}}</li>
+                        <li class="list-group-item">Group: 
+                            @if($book->category !== 'null') 
+                            {{Type::find($book->category)->type}}
+                            @else 
+                            No Type
+                            @endif
+
+                        </li>
                       </ul>
                       <div class="card-body">
                         <a href="/book/{{$book->id}}" class="btn btn-primary" style="padding: 1em;">Show Details</a>

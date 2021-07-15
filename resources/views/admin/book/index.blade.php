@@ -35,7 +35,12 @@
                             <td> {{$key+1}} </td>
                             <td> {{$book->name}} </td>
                             <td> {{$book->price}} </td>
-                            <td> {{Type::find($book->category)->type}} </td>
+                            <td> @if($book->category !== 'null')
+                                {{Type::find($book->category)->type}}
+                                @else 
+                                No type
+                                @endif
+                            </td>
                             <td>
                                 @if($book->confirmed == 1)
                                 Published

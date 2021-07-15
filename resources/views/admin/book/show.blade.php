@@ -23,10 +23,12 @@
                 <div class="col-md-6">
                     <strong>Title/Name: </strong>
                     {{$book->name}} <br>
+                    <strong>Author/Writter: </strong>
+                    {{$book->name}} <br>
                     <strong>Category: </strong>
                     {{Type::find($book->category)->type}} <br>
                     <strong>Price: </strong>
-                    {{number_format($book->price, 2)}} <br>
+                    {{number_format($book->price, 2)}} BDT<br>
                     <br>
                     <!--if statement for confirmed-->
                     <strong>Status: </strong>
@@ -41,6 +43,8 @@
                     @else 
                     <span><h6>User</h6></span>
                     @endif
+                    <strong>Book Description: </strong>
+                        <p style="padding-top:0px;">{!!$book->description!!}</p>
                 </div>
                 <div class="col-md-6">
                     <img src="{{asset('/contents/images/book/'.$book->image)}}" alt="{{$book->image}}">
